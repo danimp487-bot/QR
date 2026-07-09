@@ -1,0 +1,490 @@
+/* --- VARIABLES DE DISEÑO --- */
+:root {
+    --bg-warm: #FAF6F0; /* Beige cálido premium */
+    --white: #FFFFFF;
+    --pastel-pink: #FFD1DC;
+    --pastel-pink-dark: #F3C1C6;
+    --gold: #C5A880; /* Dorado elegante */
+    --text-dark: #3A3530; /* Marrón-gris muy oscuro para textos, más suave que el negro puro */
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-gold: 0 4px 15px rgba(197, 168, 128, 0.2);
+}
+
+/* --- RESET Y ESTILOS GLOBALES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-warm);
+    color: var(--text-dark);
+    overflow: hidden; /* Evita scrolls imprevistos del navegador */
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Contenedores de Pantalla Completa */
+.fullscreen-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 1s cubic-bezier(0.42, 0, 0.58, 1), transform 1s cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 10;
+}
+
+.fullscreen-section.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(15px); /* Desplazamiento elegante al ocultar */
+}
+
+/* --- BOTÓN FLOTANTE DE MÚSICA --- */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+    background-color: var(--bg-warm);
+}
+
+.music-icon {
+    font-size: 1.1rem;
+    color: var(--gold);
+}
+
+/* Mute state styling */
+.music-btn.muted .music-icon {
+    opacity: 0.5;
+}
+
+/* --- CORAZONES AMBIENTALES DE FONDO --- */
+.ambient-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.ambient-heart {
+    position: absolute;
+    bottom: -20px;
+    color: var(--pastel-pink);
+    opacity: 0.6;
+    font-size: 12px;
+    animation: floatUp 15s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- PANTALLA INICIAL (HERO) --- */
+#hero {
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.9) sepia(0.1); /* Efecto nostálgico suave */
+    opacity: 0.15; /* Sutil fondo */
+    z-index: -1;
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 2;
+    padding: 0 10px;
+}
+
+h1 {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* --- BOTONES PREMIUM --- */
+.btn {
+    font-family: var(--font-sans);
+    padding: 15px 35px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    outline: none;
+}
+
+.premium-btn {
+    background-color: var(--white);
+    color: var(--text-dark);
+    border: 1px solid var(--gold);
+    box-shadow: var(--shadow-gold);
+}
+
+.premium-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
+    background-color: var(--bg-warm);
+}
+
+/* --- HISTORIA (SLIDESHOW) --- */
+#story {
+    background-color: var(--bg-warm);
+}
+
+.story-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 480px; /* Tamaño ideal emulando dispositivo móvil */
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.96);
+    transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 15;
+}
+
+/* Contenedor de la fotografía */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 60%; /* Casi toda la pantalla en proporción */
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.story-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.5s ease;
+}
+
+.story-image:hover {
+    transform: scale(1.02);
+}
+
+.zoom-hint {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    font-size: 0.65rem;
+    padding: 4px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+/* Textos e interacción abajo de la foto */
+.slide-content {
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px 0 10px;
+    text-align: center;
+}
+
+.slide-text {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    overflow-y: auto; /* Permite scroll interno de texto si es muy largo en móviles pequeños */
+    max-height: 100px;
+}
+
+.btn-next {
+    background-color: var(--gold);
+    color: var(--white);
+    padding: 12px 25px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-next:hover {
+    transform: translateY(-1px);
+    background-color: #bfa178;
+}
+
+/* --- CARTA FINAL --- */
+#letter-section {
+    background-color: var(--bg-warm);
+    z-index: 20;
+}
+
+.letter-box {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--white);
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(197, 168, 128, 0.15);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+}
+
+.letter-content {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    white-space: pre-line; /* Respeta los saltos de línea */
+    overflow-y: auto; /* Scroll para cartas de gran longitud */
+    padding-right: 10px;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+/* Personalización del scroll de la carta */
+.letter-content::-webkit-scrollbar {
+    width: 4px;
+}
+.letter-content::-webkit-scrollbar-thumb {
+    background-color: var(--pastel-pink);
+    border-radius: 10px;
+}
+
+#btn-final {
+    align-self: center;
+    margin-top: 10px;
+}
+
+/* --- PANTALLA DE CIERRE --- */
+#ending-section {
+    background-color: var(--white);
+    z-index: 30;
+    overflow: hidden;
+}
+
+#hearts-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 31;
+}
+
+.ending-content {
+    z-index: 32;
+    text-align: center;
+    animation: zoomPulse 4s ease-in-out infinite;
+}
+
+.gold-text {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: -0.5px;
+}
+
+@keyframes zoomPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* --- LIGHTBOX (AMPLIAR FOTO) --- */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(26, 24, 23, 0.95);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.lightbox.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.lightbox:not(.hidden) .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: var(--white);
+    font-size: 2.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.1);
+}
+
+/* --- EFECTOS DE RETARDO Y APARICIÓN --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: smoothFade 1.2s forwards cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.delay-1 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.8s; }
+
+@keyframes smoothFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Clases de utilidad */
+.hidden {
+    display: none !important;
+}
+
+/* --- ADAPTACIÓN MÓVIL --- */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .story-wrapper {
+        height: 80vh;
+    }
+    .image-wrapper {
+        height: 52%;
+    }
+    .slide-content {
+        height: 43%;
+    }
+    .slide-text {
+        font-size: 0.95rem;
+    }
+    .letter-box {
+        height: 85vh;
+        padding: 30px 20px;
+    }
+    .letter-content {
+        font-size: 0.95rem;
+    }
+    .gold-text {
+        font-size: 2rem;
+    }
+}
