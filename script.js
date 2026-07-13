@@ -1,64 +1,62 @@
-// =======================
+// =============================
 // ELEMENTOS
-// =======================
+// =============================
 
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
-
 const textoElemento = document.getElementById("typewriter");
 const cursor = document.getElementById("cursor");
 const boton = document.getElementById("nextButton");
-
 const musica = document.getElementById("bgMusic");
 
-// =======================
-// VARIABLES
-// =======================
+// =============================
+// CONFIGURACIÓN
+// =============================
 
 let indice = 0;
-const velocidad = 32;
+const velocidad = 35;
 
-// =======================
-// ABRIR SOBRE
-// =======================
+// =============================
+// INICIO
+// =============================
 
-window.addEventListener("load", () => {
+window.onload = () => {
 
     iniciarMusica();
 
-    // Espera un poco antes de abrir el sobre
+    // Abrir el sobre después de 1 segundo
     setTimeout(() => {
 
         envelope.classList.add("open");
 
-        // Espera a que salga la carta
-        setTimeout(() => {
+    },1000);
 
-            escribirTexto();
+    // Empezar a escribir cuando salga la carta
+    setTimeout(() => {
 
-        },1800);
+        escribirTexto();
 
-    },1200);
+    },2600);
 
-});
+};
 
-// =======================
-// EFECTO ESCRITURA
-// =======================
+// =============================
+// EFECTO MÁQUINA DE ESCRIBIR
+// =============================
 
 function escribirTexto(){
 
     if(indice < texto.length){
 
-        const letra = texto.charAt(indice);
+        let caracter = texto.charAt(indice);
 
-        if(letra === "\n"){
+        if(caracter === "\n"){
 
             textoElemento.innerHTML += "<br><br>";
 
         }else{
 
-            textoElemento.innerHTML += letra;
+            textoElemento.innerHTML += caracter;
 
         }
 
@@ -68,90 +66,72 @@ function escribirTexto(){
 
     }else{
 
-        finalizarCarta();
+        terminarCarta();
 
     }
 
 }
 
-// =======================
+// =============================
 // TERMINAR CARTA
-// =======================
+// =============================
 
-function finalizarCarta(){
+function terminarCarta(){
 
-    cursor.style.display="none";
+    cursor.style.display = "none";
 
     setTimeout(()=>{
 
-        boton.classList.add("show");
+        boton.style.display = "block";
 
-    },1200);
+        setTimeout(()=>{
+
+            boton.classList.add("show");
+
+        },50);
+
+    },1500);
 
 }
 
-// =======================
+// =============================
 // BOTÓN
-// =======================
+// =============================
 
 boton.addEventListener("click",()=>{
-
-    boton.disabled=true;
 
     document.body.classList.add("fade");
 
     setTimeout(()=>{
 
-        mostrarSegundaPantalla();
+        window.location.href="historia1.html";
 
-    },1200);
+    },1000);
 
 });
 
-// =======================
-// SEGUNDA PANTALLA
-// =======================
-
-function mostrarSegundaPantalla(){
-
-    alert("Aquí empezará nuestro viaje ❤️");
-
-}
-
-// =======================
+// =============================
 // MÚSICA
-// =======================
+// =============================
 
 function iniciarMusica(){
 
-    musica.volume=0;
+    musica.volume = 0.35;
 
-    musica.play().catch(()=>{
+    const playPromise = musica.play();
 
-        document.addEventListener("click",()=>{
+    if(playPromise !== undefined){
 
-            musica.play();
+        playPromise.catch(()=>{
 
-        },{once:true});
+            document.addEventListener("click",()=>{
 
-    });
+                musica.play();
 
-    let volumen=0;
+            },{once:true});
 
-    const fade=setInterval(()=>{
+        });
 
-        volumen+=0.02;
-
-        if(volumen>=0.35){
-
-            volumen=0.35;
-
-            clearInterval(fade);
-
-        }
-
-        musica.volume=volumen;
-
-    },120);
+    }
 
 }
