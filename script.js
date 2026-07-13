@@ -33,7 +33,7 @@ const recuerdos = [
     { img: "img/foto3.jpg", text: "Esas clases de TIC juntos o cualquier otra donde solo pensaba en querer estar pegado a ti porque eras mi unico motivo para querer ir al instituto." },
     { img: "img/foto4.jpg", text: "Cuando estabamos en mi cochera todo el dia juntos hablando de lo que fuera aun pasando mucha calor me encantaba estar alli contigo." },
     { img: "img/foto5.jpg", text: "Nuestro 2º aniversario, que guapa estabas con ese vestido y como me gusta irme de hotel contigo, ojalá nos vayamos siempre juntos a uno en nuestro aniversario." },
-    { img: "img/foto6.jpg", text: "Esa cena improvisada en la cocina donde terminamos bailando." },
+    { img: "img/foto0.jpg", text: "Esa cena improvisada en la cocina donde terminamos bailando." },
     { img: "img/foto7.jpg", text: "En nuestra graduación, es alucinante como se pueden pasar tantos momentos importantes con una persona que te hace tan feliz, al ver estas fotos me acuerdo de lo afortunado que soy." },
     { img: "img/foto8.jpg", text: "Cada momento, cada cita, aunque sea de compras con tu madre sera un buen recuerdo para mi, porque estas tú en el ." },
     { img: "img/foto9.jpg", text: "Caminatas eternas cogidos de la mano sin importar el destino." },
