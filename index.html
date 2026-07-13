@@ -6,58 +6,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Feliz 21 Cumpleaños ❤️</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Feliz Cumpleaños ❤️</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <!-- Música -->
-    <audio id="bgMusic" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+<!-- Música -->
 
-    <!-- Fondo -->
-    <div class="background"></div>
+<audio id="bgMusic" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Pétalos -->
-    <div id="petals"></div>
+<!-- Fondo -->
 
-    <!-- Partículas -->
-    <div id="particles"></div>
+<div class="background"></div>
 
-    <!-- Sobre -->
+<div id="petals"></div>
 
-    <div id="envelope">
+<!-- ==========================
+CARTA INICIAL
+=========================== -->
 
-        <div class="cover"></div>
+<section id="intro">
 
-        <div id="letter">
+    <div class="letter">
 
-            <h1>Para Nerea ❤️</h1>
+        <h1>Para Nerea ❤️</h1>
 
-            <p id="typewriter"></p>
+        <p id="typewriter"></p>
 
-            <span id="cursor">|</span>
+        <span id="cursor">|</span>
 
-            <button id="nextButton">
-                Comenzar nuestro viaje ❤️
-            </button>
+        <button id="startButton">
 
-        </div>
+            ❤️ Comenzar nuestro viaje ❤️
+
+        </button>
 
     </div>
 
+</section>
+
+<!-- ==========================
+RECUERDOS
+=========================== -->
+
+<section id="memorySection">
+
+    <div class="memoryCard">
+
+        <img
+            id="memoryImage"
+            src=""
+            alt="Recuerdo">
+
+        <h2 id="memoryTitle"></h2>
+
+        <p id="memoryText"></p>
+
+        <button id="nextMemory">
+
+            ❤️ Siguiente recuerdo ❤️
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+CARTA FINAL
+=========================== -->
+
+<section id="finalSection">
+
+    <div class="letter">
+
+        <h1>Para siempre nosotros ❤️</h1>
+
+        <p id="finalText"></p>
+
+        <button id="finishButton">
+
+            ❤️ Feliz cumpleaños mi vida ❤️
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+TEXTO INICIAL
+=========================== -->
+
 <script>
 
-const texto = `Feliz 21 cumpleaños, mi amor. ❤️
+const textoInicial = `Feliz 21 cumpleaños, mi amor. ❤️
 
 Este año quería regalarte algo un poco diferente. No quería que este día se quedara solo en un regalo material, porque siento que lo más valioso que tenemos es todo lo que hemos vivido juntos.
 
