@@ -156,6 +156,10 @@ CARTA INICIAL
 
 .letter{
 
+    display:none;
+
+    opacity:0;
+
     width:100%;
     max-width:420px;
 
@@ -173,6 +177,8 @@ CARTA INICIAL
     backdrop-filter:blur(10px);
 
     animation:subir 1.3s ease;
+
+    transition:opacity .8s ease;
 
 }
 
