@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Feliz 21 Cumpleaños ❤️</title>
 
-    <!-- Fuente elegante -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-    <!-- ========================= -->
-    <!-- Música de fondo -->
-    <!-- Sustituye "musica.mp3" por tu canción -->
-    <!-- ========================= -->
+    <!-- Música -->
     <audio id="bgMusic" loop>
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
@@ -25,44 +27,37 @@
     <!-- Fondo -->
     <div class="background"></div>
 
-    <!-- Corazones flotantes -->
-    <div class="hearts">
-        <span>❤️</span>
-        <span>🤍</span>
-        <span>❤️</span>
-        <span>🤍</span>
-        <span>❤️</span>
-        <span>🤍</span>
-        <span>❤️</span>
-        <span>🤍</span>
-    </div>
+    <!-- Pétalos -->
+    <div id="petals"></div>
 
-    <!-- Contenido principal -->
-    <main class="container">
+    <!-- Partículas -->
+    <div id="particles"></div>
 
-        <div class="glass-card">
+    <!-- Sobre -->
 
-            <h1>Para la persona más especial de mi vida ❤️</h1>
+    <div id="envelope">
 
-            <!-- Aquí se escribirá el texto -->
+        <div class="cover"></div>
+
+        <div id="letter">
+
+            <h1>Para Nerea ❤️</h1>
+
             <p id="typewriter"></p>
 
-            <!-- Cursor -->
             <span id="cursor">|</span>
 
-            <!-- Botón -->
             <button id="nextButton">
                 Comenzar nuestro viaje ❤️
             </button>
 
         </div>
 
-    </main>
+    </div>
 
-    <!-- Texto que se escribirá -->
-    <script>
+<script>
 
-        const texto = `Feliz 21 cumpleaños, mi amor. ❤️
+const texto = `Feliz 21 cumpleaños, mi amor. ❤️
 
 Este año quería regalarte algo un poco diferente. No quería que este día se quedara solo en un regalo material, porque siento que lo más valioso que tenemos es todo lo que hemos vivido juntos.
 
@@ -76,9 +71,10 @@ Te amo con todo mi corazón.
 
 Feliz cumpleaños, mi vida. ❤️`;
 
-    </script>
+</script>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
+
 </html>
