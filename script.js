@@ -107,6 +107,18 @@ boton.addEventListener("click", () => {
 
     }, 150);
 
+    setTimeout(() => {
+
+    cursor.style.display = "none";
+
+    boton.style.display = "block";
+
+    setTimeout(() => {
+        boton.classList.add("mostrar");
+    },100);
+
+},2000);
+
 });
 
 // ================================
