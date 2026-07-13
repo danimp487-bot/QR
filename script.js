@@ -1,137 +1,139 @@
-// =============================
-// ELEMENTOS
-// =============================
-
-const envelope = document.getElementById("envelope");
-const letter = document.getElementById("letter");
-const textoElemento = document.getElementById("typewriter");
-const cursor = document.getElementById("cursor");
-const boton = document.getElementById("nextButton");
-const musica = document.getElementById("bgMusic");
-
-// =============================
-// CONFIGURACIÓN
-// =============================
-
-let indice = 0;
-const velocidad = 35;
-
-// =============================
-// INICIO
-// =============================
-
-window.onload = () => {
-
-    iniciarMusica();
-
-    // Abrir el sobre después de 1 segundo
-    setTimeout(() => {
-
-        envelope.classList.add("open");
-
-    },1000);
-
-    // Empezar a escribir cuando salga la carta
-    setTimeout(() => {
-
-        escribirTexto();
-
-    },2600);
-
-};
-
-// =============================
-// EFECTO MÁQUINA DE ESCRIBIR
-// =============================
-
-function escribirTexto(){
-
-    if(indice < texto.length){
-
-        let caracter = texto.charAt(indice);
-
-        if(caracter === "\n"){
-
-            textoElemento.innerHTML += "<br><br>";
-
-        }else{
-
-            textoElemento.innerHTML += caracter;
-
-        }
-
-        indice++;
-
-        setTimeout(escribirTexto,velocidad);
-
-    }else{
-
-        terminarCarta();
-
-    }
-
-}
-
-// =============================
-// TERMINAR CARTA
-// =============================
-
-function terminarCarta(){
-
-    cursor.style.display = "none";
-
-    setTimeout(()=>{
-
-        boton.style.display = "block";
-
-        setTimeout(()=>{
-
-            boton.classList.add("show");
-
-        },50);
-
-    },1500);
-
-}
-
-// =============================
-// BOTÓN
-// =============================
-
-boton.addEventListener("click",()=>{
-
-    document.body.classList.add("fade");
-
-    setTimeout(()=>{
-
-        window.location.href="historia1.html";
-
-    },1000);
-
-});
-
-// =============================
+// ======================================
 // MÚSICA
-// =============================
+// ======================================
 
-function iniciarMusica(){
+const music = document.getElementById("bgMusic");
 
-    musica.volume = 0.35;
+// ======================================
+// CARTA INICIAL
+// ======================================
 
-    const playPromise = musica.play();
+const texto = textoInicial;
 
-    if(playPromise !== undefined){
+const typewriter = document.getElementById("typewriter");
+const cursor = document.getElementById("cursor");
+const startButton = document.getElementById("startButton");
 
-        playPromise.catch(()=>{
+// ======================================
+// RECUERDOS
+// ======================================
 
-            document.addEventListener("click",()=>{
+const memorySection = document.getElementById("memorySection");
 
-                musica.play();
+const memoryImage = document.getElementById("memoryImage");
+const memoryTitle = document.getElementById("memoryTitle");
+const memoryText = document.getElementById("memoryText");
 
-            },{once:true});
+const nextMemory = document.getElementById("nextMemory");
 
-        });
+// ======================================
+// FINAL
+// ======================================
 
-    }
+const intro = document.getElementById("intro");
 
+const finalSection = document.getElementById("finalSection");
+
+const finalText = document.getElementById("finalText");
+
+const finishButton = document.getElementById("finishButton");
+
+// ======================================
+// VARIABLES
+// ======================================
+
+let indiceTexto = 0;
+
+let recuerdoActual = 0;
+
+// ======================================
+// LOS 13 RECUERDOS
+// ======================================
+
+const recuerdos = [
+
+{
+imagen:"img/foto1.jpg",
+titulo:"❤️ Capítulo 1 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO DEL PRIMER RECUERDO."
+},
+
+{
+imagen:"img/foto2.jpg",
+titulo:"❤️ Capítulo 2 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO DEL SEGUNDO RECUERDO."
+},
+
+{
+imagen:"img/foto3.jpg",
+titulo:"❤️ Capítulo 3 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO DEL TERCER RECUERDO."
+},
+
+{
+imagen:"img/foto4.jpg",
+titulo:"❤️ Capítulo 4 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto5.jpg",
+titulo:"❤️ Capítulo 5 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto6.jpg",
+titulo:"❤️ Capítulo 6 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto7.jpg",
+titulo:"❤️ Capítulo 7 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto8.jpg",
+titulo:"❤️ Capítulo 8 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto9.jpg",
+titulo:"❤️ Capítulo 9 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto10.jpg",
+titulo:"❤️ Capítulo 10 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto11.jpg",
+titulo:"❤️ Capítulo 11 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto12.jpg",
+titulo:"❤️ Capítulo 12 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO."
+},
+
+{
+imagen:"img/foto13.jpg",
+titulo:"❤️ Capítulo 13 ❤️",
+texto:"ESCRIBE AQUÍ EL TEXTO DEL ÚLTIMO RECUERDO."
 }
+
+];
+
+// ======================================
+// TEXTO FINAL
+// ======================================
+
+const mensajeFinal = `Aquí escribirás el mensaje final para Nerea. ❤️`;
