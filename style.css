@@ -136,7 +136,7 @@ section {
 }
 
 /* ==========================================================================
-   TÍTULOS Y TEXTOS
+   TÍTULOS Y TEXTOS (CON SCROLL MEJORADO)
    ========================================================================== */
 .romantic-title {
     font-family: 'Great Vibes', cursive;
@@ -146,33 +146,36 @@ section {
     font-weight: 400;
 }
 
-.romantic-subtitle {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.3rem;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    font-weight: 400;
-}
-
 .text-container {
     font-size: 1rem;
     line-height: 1.8;
     color: var(--text-dark);
-    min-height: 250px;
+    height: 300px; /* Altura fija para que el scroll funcione perfectamente */
     text-align: left;
     white-space: pre-wrap;
-    overflow-y: auto;
-    max-height: 380px;
-    padding-right: 5px;
+    overflow-y: scroll; /* Cambiado para que la barra siempre esté visible */
+    padding-right: 12px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Scroll ultra suave en móviles */
 }
 
-/* Scroll sutil de la carta si es un móvil muy pequeño */
+/* Personalización elegante de la barra de scroll */
 .text-container::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
 }
+
+.text-container::-webkit-scrollbar-track {
+    background: rgba(255, 182, 193, 0.15);
+    border-radius: 10px;
+}
+
 .text-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 77, 109, 0.3);
-    border-radius: 4px;
+    background: rgba(255, 77, 109, 0.45);
+    border-radius: 10px;
+}
+
+.text-container::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
 
 .cursor {
@@ -285,7 +288,7 @@ section {
 
 .polaroid-info {
     margin-top: 15px;
-    min-height: 110px;
+    min-height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -355,14 +358,13 @@ section {
         padding: 25px 15px;
     }
     .romantic-title { font-size: 2.6rem; }
-    .romantic-subtitle { font-size: 2rem; }
-    .text-container { min-height: 280px; font-size: 0.95rem; }
+    .text-container { height: 280px; font-size: 0.95rem; }
 }
 
 @media (max-height: 680px) {
     .card { padding: 15px; }
     .romantic-title { font-size: 2.2rem; margin-bottom: 10px; }
-    .text-container { min-height: 180px; max-height: 200px; }
+    .text-container { height: 180px; }
     .polaroid-frame img { aspect-ratio: 1/1; }
-    .polaroid-info { min-height: 80px; }
+    .polaroid-info { min-height: 60px; }
 }
