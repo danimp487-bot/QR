@@ -1,35 +1,722 @@
-/* PARTE 1 */
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;height:100%;overflow:hidden;font-family:'Poppins',sans-serif;}
-body{display:flex;justify-content:center;align-items:center;position:relative;background:#f8d7e5;}
+/*=========================
+FUENTES Y RESET
+=========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    width:100%;
+    height:100%;
+}
+
+body{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    font-family:'Poppins',sans-serif;
+
+    background:#ffe8f0;
+
+    position:relative;
+
+}
+
+/*=========================
+FONDO
+=========================*/
+
 .background{
-position:fixed;inset:0;
-background:radial-gradient(circle at top,#ffdbe9 0%,transparent 40%),
-radial-gradient(circle at bottom,#ffe7d1 0%,transparent 45%),
-linear-gradient(135deg,#ffd9ec,#ffe7d7,#fff6f8);
-background-size:300% 300%;
-animation:fondo 18s ease infinite;
-z-index:-10;}
-@keyframes fondo{0%{background-position:left top;}50%{background-position:right bottom;}100%{background
--position:left top;}}
-#envelope{position:relative;width:90vw;max-width:420px;height:80vh;display:flex;justify-content:center;align-ite
-ms:flex-end;}
-/* PARTE 2 */
-.cover{position:absolute;bottom:0;width:100%;height:220px;background:linear-gradient(135deg,#f7b7cb,#f29ab
-7);border-radius:18px;overflow:hidden;}
-.cover::before{content:"";position:absolute;left:0;top:0;width:0;height:0;border-left:210px solid transparent;borde
-r-right:210px solid transparent;border-top:150px solid #f8c7d8;transform-origin:top;transition:1.4s;}
-#letter{position:absolute;bottom:30px;width:90%;height:78%;background:white;border-radius:18px;padding:25p
-x;overflow-y:auto;box-shadow:0 20px 45px rgba(0,0,0,.2);transform:translateY(170px);transition:2s;}
-.open .cover::before{transform:rotateX(180deg);}
-.open #letter{transform:translateY(-40px);}
-/* PARTE 3 */
-#letter h1{font-family:'Great Vibes',cursive;font-size:2.4rem;text-align:center;color:#d85c8b;margin-bottom:20px
-;}
-#typewriter{font-size:1rem;line-height:1.9;text-align:center;white-space:pre-wrap;color:#555;}
-#cursor{animation:blink .8s infinite;color:#d85c8b;}
-@keyframes blink{50%{opacity:0;}}
-#nextButton{display:none;margin:30px auto 0;padding:15px 30px;border:none;border-radius:40px;background:
-#ff6fa5;color:#fff;font-size:17px;cursor:pointer;}
-#nextButton.show{display:block;animation:show .8s;}
-@keyframes show{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,#ffd4e4 0%,transparent 35%),
+    radial-gradient(circle at bottom,#ffe8d8 0%,transparent 40%),
+    linear-gradient(180deg,#fff7fb,#ffe5ef,#ffd8e7);
+
+    z-index:-10;
+
+}
+
+/*=========================
+PÉTALOS Y PARTÍCULAS
+=========================*/
+
+#petals,
+#particles{
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:-5;
+
+}
+
+/*=========================
+SOBRE
+=========================*/
+
+#envelope{
+
+    position:relative;
+
+    width:min(92vw,420px);
+
+    height:700px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+}
+
+/*=========================
+SOBRE
+=========================*/
+
+.back{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:240px;
+
+    background:#f8bfd3;
+
+    border-radius:18px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+
+}
+
+/* Solapa */
+
+.cover{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:240px;
+
+    z-index:8;
+
+}
+
+.cover::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:0;
+    height:0;
+
+    border-left:210px solid transparent;
+    border-right:210px solid transparent;
+    border-top:150px solid #f5aeca;
+
+    transform-origin:top;
+
+    transition:1.5s ease;
+
+}
+
+/* Laterales */
+
+.cover::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(135deg,#f8c7d8,#f2a7c3);
+
+    border-radius:18px;
+
+}
+
+/*=========================
+CARTA
+=========================*/
+
+#letter{
+
+    position:absolute;
+
+    bottom:30px;
+
+    width:90%;
+
+    height:82%;
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:18px;
+
+    padding:30px;
+
+    overflow-y:auto;
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.22);
+
+    transform:translateY(180px);
+
+    transition:2s ease;
+
+    z-index:4;
+
+}
+
+/* Abrir sobre */
+
+.open .cover::before{
+
+    transform:rotateX(180deg);
+
+}
+
+.open #letter{
+
+    transform:translateY(-60px);
+
+}
+
+/* Scroll */
+
+#letter::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+#letter::-webkit-scrollbar-thumb{
+
+    background:#e7a4bc;
+
+    border-radius:20px;
+
+}
+
+/*=========================
+TÍTULO
+=========================*/
+
+#letter h1{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:2.8rem;
+
+    color:#d85c8b;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-weight:normal;
+
+    text-shadow:0 2px 10px rgba(216,92,139,.2);
+
+}
+
+/*=========================
+TEXTO
+=========================*/
+
+.texto{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+#typewriter{
+
+    width:100%;
+
+    color:#5c5c5c;
+
+    font-size:1.05rem;
+
+    line-height:2;
+
+    text-align:center;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+    min-height:260px;
+
+}
+
+/*=========================
+CURSOR
+=========================*/
+
+#cursor{
+
+    color:#d85c8b;
+
+    font-size:28px;
+
+    margin-top:5px;
+
+    animation:cursor .8s infinite;
+
+}
+
+@keyframes cursor{
+
+    50%{
+
+        opacity:0;
+
+    }
+
+}
+
+/*=========================
+BOTÓN
+=========================*/
+
+#nextButton{
+
+    display:none;
+
+    margin:40px auto 15px;
+
+    padding:16px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ff8fb3,#ff6f9f);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 12px 25px rgba(255,111,159,.35);
+
+}
+
+#nextButton:hover{
+
+    transform:translateY(-3px) scale(1.05);
+
+    box-shadow:0 18px 35px rgba(255,111,159,.45);
+
+}
+
+#nextButton.show{
+
+    display:block;
+
+    animation:mostrarBoton .8s ease forwards;
+
+}
+
+@keyframes mostrarBoton{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+ANIMACIÓN GENERAL
+=========================*/
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+#letter{
+
+    animation:fade 1.4s ease;
+
+}
+
+/*=========================
+BRILLO DE LA CARTA
+=========================*/
+
+#letter::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        130deg,
+        transparent 0%,
+        rgba(255,255,255,.55) 50%,
+        transparent 100%
+    );
+
+    opacity:.25;
+
+    pointer-events:none;
+
+}
+
+/*=========================
+BOTÓN
+=========================*/
+
+#nextButton{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+#nextButton::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.45);
+
+    transform:skewX(-30deg);
+
+    transition:.8s;
+
+}
+
+#nextButton:hover::before{
+
+    left:150%;
+
+}
+
+#nextButton:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/*=========================
+PÉTALOS
+=========================*/
+
+.petal{
+
+    position:fixed;
+
+    top:-40px;
+
+    width:18px;
+
+    height:18px;
+
+    background:#ffc8da;
+
+    border-radius:60% 40% 60% 40%;
+
+    opacity:.75;
+
+    pointer-events:none;
+
+    animation:fall linear forwards;
+
+}
+
+@keyframes fall{
+
+    from{
+
+        transform:
+        translateY(-40px)
+        rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+        translateY(120vh)
+        translateX(120px)
+        rotate(720deg);
+
+    }
+
+}
+
+/*=========================
+PARTÍCULAS
+=========================*/
+
+.sparkle{
+
+    position:fixed;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.7;
+
+    animation:twinkle 3s infinite;
+
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+
+        opacity:.2;
+
+        transform:scale(.6);
+
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:scale(1.4);
+
+    }
+
+}
+
+/*=========================
+TRANSICIÓN ENTRE PÁGINAS
+=========================*/
+
+.fade{
+
+    animation:desaparecer 1s forwards;
+
+}
+
+@keyframes desaparecer{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+/*=========================
+RESPONSIVE MÓVIL
+=========================*/
+
+@media (max-width:768px){
+
+    #envelope{
+
+        width:95vw;
+        height:92vh;
+
+    }
+
+    .cover,
+    .back{
+
+        height:180px;
+
+    }
+
+    .cover::before{
+
+        border-left:47.5vw solid transparent;
+        border-right:47.5vw solid transparent;
+        border-top:120px solid #f5aeca;
+
+    }
+
+    #letter{
+
+        width:92%;
+        height:80%;
+        padding:20px;
+
+        transform:translateY(150px);
+
+    }
+
+    .open #letter{
+
+        transform:translateY(-30px);
+
+    }
+
+    #letter h1{
+
+        font-size:2.1rem;
+
+        margin-bottom:20px;
+
+    }
+
+    #typewriter{
+
+        font-size:0.95rem;
+
+        line-height:1.8;
+
+    }
+
+    #nextButton{
+
+        width:100%;
+
+        padding:15px;
+
+        font-size:16px;
+
+    }
+
+}
+
+/*=========================
+MÓVILES PEQUEÑOS
+=========================*/
+
+@media (max-width:400px){
+
+    #letter{
+
+        padding:16px;
+
+    }
+
+    #letter h1{
+
+        font-size:1.8rem;
+
+    }
+
+    #typewriter{
+
+        font-size:0.9rem;
+
+    }
+
+}
+
+/*=========================
+EFECTO CRISTAL
+=========================*/
+
+#letter{
+
+    backdrop-filter:blur(8px);
+
+    border:1px solid rgba(255,255,255,.5);
+
+}
+
+/*=========================
+SOMBRA SUAVE
+=========================*/
+
+#letter,
+.back{
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.15);
+
+}
