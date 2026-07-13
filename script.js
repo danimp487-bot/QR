@@ -44,91 +44,91 @@ const recuerdos = [
     {
         imagen: "img/foto1.jpg",
         titulo: "❤️ Capítulo 1 ❤️",
-        texto: "Aquí va el texto de tu primer recuerdo especial con Nerea."
+        texto: "ESCRIBE AQUÍ EL TEXTO DEL PRIMER RECUERDO."
     },
     {
         imagen: "img/foto2.jpg",
         titulo: "❤️ Capítulo 2 ❤️",
-        texto: "Aquí va el texto de tu segundo recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO DEL SEGUNDO RECUERDO."
     },
     {
         imagen: "img/foto3.jpg",
         titulo: "❤️ Capítulo 3 ❤️",
-        texto: "Aquí va el texto de tu tercer recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO DEL TERCER RECUERDO."
     },
     {
         imagen: "img/foto4.jpg",
         titulo: "❤️ Capítulo 4 ❤️",
-        texto: "Aquí va el texto de tu cuarto recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto5.jpg",
         titulo: "❤️ Capítulo 5 ❤️",
-        texto: "Aquí va el texto de tu quinto recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto6.jpg",
         titulo: "❤️ Capítulo 6 ❤️",
-        texto: "Aquí va el texto de tu sexto recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto7.jpg",
         titulo: "❤️ Capítulo 7 ❤️",
-        texto: "Aquí va el texto de tu séptimo recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto8.jpg",
         titulo: "❤️ Capítulo 8 ❤️",
-        texto: "Aquí va el texto de tu octavo recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto9.jpg",
         titulo: "❤️ Capítulo 9 ❤️",
-        texto: "Aquí va el texto de tu noveno recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto10.jpg",
         titulo: "❤️ Capítulo 10 ❤️",
-        texto: "Aquí va el texto de tu décimo recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto11.jpg",
         titulo: "❤️ Capítulo 11 ❤️",
-        texto: "Aquí va el texto de tu undécimo recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto12.jpg",
         titulo: "❤️ Capítulo 12 ❤️",
-        texto: "Aquí va el texto de tu duodécimo recuerdo."
+        texto: "ESCRIBE AQUÍ EL TEXTO."
     },
     {
         imagen: "img/foto13.jpg",
         titulo: "❤️ Capítulo 13 ❤️",
-        texto: "Aquí va el texto del último recuerdo antes de la gran carta final."
+        texto: "ESCRIBE AQUÍ EL TEXTO DEL ÚLTIMO RECUERDO."
     }
 ];
 
 // ======================================
 // TEXTO FINAL
 // ======================================
-const mensajeFinal = `Nerea, escribe aquí tu mensaje final de cumpleaños de la forma más romántica y bonita posible para cerrar el viaje por vuestros recuerdos. ❤️`;
+const mensajeFinal = `Aquí escribirás el mensaje final para Nerea. ❤️`;
 
 // ======================================
-// EFECTO MÁQUINA DE ESCRIBIR (TEXTO INICIAL)
+// EFECTO MÁQUINA DE ESCRIBIR (CARTA INICIAL)
 // ======================================
 function escribirTexto() {
     if (indiceTexto < texto.length) {
         typewriter.innerHTML += texto.charAt(indiceTexto);
         indiceTexto++;
-        setTimeout(escribirTexto, 35); // Velocidad de escritura (ms)
+        setTimeout(escribirTexto, 35); // Velocidad de escritura (ms por letra)
     } else {
         cursor.style.display = "none";
-        startButton.classList.add("show");
+        startButton.classList.add("show"); // Muestra el botón de comenzar
     }
 }
 
 // ======================================
-// EFECTO MÁQUINA DE ESCRIBIR (TEXTO FINAL)
+// EFECTO MÁQUINA DE ESCRIBIR (CARTA FINAL)
 // ======================================
 let indiceTextoFinal = 0;
 function escribirTextoFinal() {
@@ -150,13 +150,12 @@ function cargarRecuerdo() {
 }
 
 // ======================================
-// EVENTOS DE LOS BOTONES
+// EVENTOS DE BOTONES
 // ======================================
 
-// Botón de comenzar viaje
+// Comenzar viaje (Oculta carta inicial, muestra recuerdos)
 startButton.addEventListener("click", () => {
     music.play().catch(() => {});
-    
     intro.classList.add("ocultar");
     setTimeout(() => {
         intro.style.display = "none";
@@ -166,7 +165,7 @@ startButton.addEventListener("click", () => {
     }, 800);
 });
 
-// Botón de siguiente recuerdo
+// Siguiente recuerdo
 nextMemory.addEventListener("click", () => {
     recuerdoActual++;
     if (recuerdoActual < recuerdos.length) {
@@ -190,16 +189,16 @@ nextMemory.addEventListener("click", () => {
     }
 });
 
-// Botón de finalizar
+// Botón de finalización (Efecto lluvia de corazones)
 finishButton.addEventListener("click", () => {
     for (let i = 0; i < 40; i++) {
         setTimeout(crearCorazon, i * 80);
     }
-    alert("¡Feliz cumpleaños, Nerea! Gracias por compartir tu camino conmigo. ❤️");
+    alert("¡Feliz cumpleaños, Nerea! ❤️");
 });
 
 // ======================================
-// GENERACIÓN DINÁMICA DE ELEMENTOS (PÉTALOS Y CORAZONES)
+// GENERADOR DE PÉTALOS Y CORAZONES
 // ======================================
 function crearPetalo() {
     const petalsContainer = document.getElementById("petals");
@@ -207,7 +206,6 @@ function crearPetalo() {
 
     const petal = document.createElement("div");
     petal.classList.add("petal");
-    
     petal.style.left = Math.random() * 100 + "vw";
     petal.style.animationDuration = Math.random() * 4 + 5 + "s";
     petal.style.opacity = Math.random() * 0.4 + 0.6;
@@ -217,17 +215,13 @@ function crearPetalo() {
     petal.style.height = size + "px";
     
     petalsContainer.appendChild(petal);
-
-    setTimeout(() => {
-        petal.remove();
-    }, 9000);
+    setTimeout(() => petal.remove(), 9000);
 }
 
 function crearCorazon() {
     const heartElement = document.createElement("div");
     heartElement.classList.add("heart");
     heartElement.innerHTML = "❤️";
-    
     heartElement.style.left = Math.random() * 100 + "vw";
     heartElement.style.animationDuration = Math.random() * 3 + 4 + "s";
     
@@ -235,50 +229,34 @@ function crearCorazon() {
     heartElement.style.fontSize = size + "px";
     
     document.body.appendChild(heartElement);
-
-    setTimeout(() => {
-        heartElement.remove();
-    }, 7000);
+    setTimeout(() => heartElement.remove(), 7000);
 }
 
 setInterval(crearPetalo, 400);
 setInterval(crearCorazon, 800);
 
 // ======================================
-// TIMELINE AL CARGAR LA PÁGINA (NUEVA FÍSICA)
+// SECUENCIA DE APERTURA (PORTADA)
 // ======================================
 window.onload = () => {
     music.play().catch(() => {});
 
-    // 1. A los 2 segundos: Detener el latido y abrir las solapas del corazón
+    // 1. A los 2 segundos: El corazón detiene su latido y abre sus solapas
     setTimeout(() => {
-        const leftPart = document.querySelector(".left");
-        const rightPart = document.querySelector(".right");
-        const heartElement = document.getElementById("heart");
-
-        if (leftPart && rightPart) {
-            leftPart.classList.add("open");
-            rightPart.classList.add("open");
-        }
-        if (heartElement) {
-            heartElement.classList.add("open"); // Detiene la animación de latido
-        }
+        document.getElementById("heart").classList.add("stop-beat");
+        document.querySelector(".left").classList.add("open");
+        document.querySelector(".right").classList.add("open");
     }, 2000);
 
-    // 2. A los 3.5 segundos: Hacer que la carta emerja del corazón y el corazón se atenúe
+    // 2. A los 3.5 segundos: El corazón se desvanece al fondo y la carta emerge
     setTimeout(() => {
-        if (heartContainer) {
-            heartContainer.classList.add("fade"); // Encoge y transparenta el corazón de fondo
-        }
-        if (letter) {
-            letter.style.display = "block";
-            letter.classList.add("emerge"); // Activa la animación física de salida
-        }
-
-        // 3. Justo cuando la carta termina de subir (1.5s después), empieza a escribirse el texto
+        heartContainer.classList.add("fade"); // Transición CSS suave del corazón
+        letter.classList.add("active"); // Animación de surgimiento de la carta
+        
+        // 3. A los 5.3 segundos (cuando la carta se posiciona): Comienza la escritura
         setTimeout(() => {
             escribirTexto();
-        }, 1500);
+        }, 1800);
 
     }, 3500);
 };
