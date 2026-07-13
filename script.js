@@ -13,6 +13,9 @@ const texto = textoInicial;
 const typewriter = document.getElementById("typewriter");
 const cursor = document.getElementById("cursor");
 const startButton = document.getElementById("startButton");
+const heart=document.getElementById("heart");
+const heartContainer=document.getElementById("heartContainer");
+const letter=document.getElementById("letter");
 
 // ======================================
 // RECUERDOS
@@ -137,3 +140,33 @@ texto:"ESCRIBE AQUÍ EL TEXTO DEL ÚLTIMO RECUERDO."
 // ======================================
 
 const mensajeFinal = `Aquí escribirás el mensaje final para Nerea. ❤️`;
+
+window.onload=()=>{
+
+    music.play().catch(()=>{});
+
+    setTimeout(()=>{
+
+        document.querySelector(".left").style.transform="rotate(-130deg)";
+
+        document.querySelector(".right").style.transform="rotate(130deg)";
+
+    },2000);
+
+    setTimeout(()=>{
+
+        heartContainer.style.display="none";
+
+        letter.style.display="block";
+
+        setTimeout(()=>{
+
+            letter.style.opacity="1";
+
+            escribirTexto();
+
+        },100);
+
+    },3200);
+
+};
