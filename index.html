@@ -1,146 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Feliz Cumpleaños ❤️</title>
-
-    <link rel="stylesheet" href="style.css">
-
+    <title>Feliz Cumpleaños, Mi Amor ❤️</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- Música -->
+    <audio id="bgMusic" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="bgMusic" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
+    <button id="musicToggle" class="music-btn" aria-label="Reproducir/Pausar música">🎵</button>
 
-<!-- Fondo -->
+    <div id="petals-container"></div>
 
-<div class="background"></div>
-
-<div id="petals"></div>
-
-<!-- ==========================
-CARTA INICIAL
-=========================== -->
-
-<section id="intro">
-
-    <div id="heartContainer">
-
-        <div id="heart">
-
-            <div class="left"></div>
-
-            <div class="right"></div>
-
+    <section id="part1" class="active-section">
+        <div class="card glass">
+            <h1 class="romantic-title">Para Nerea ❤️</h1>
+            <div class="text-container">
+                <p id="typewriter1"></p><span class="cursor">|</span>
+            </div>
+            <button id="toPart2Btn" class="primary-btn hidden-element">
+                ❤️ Comenzar nuestro viaje ❤️
+            </button>
         </div>
+    </section>
 
-    </div>
+    <section id="part2" style="display: none;">
+        <div class="card glass polaroid-card">
+            <div id="memory-counter" class="counter">1 / 13</div>
+            
+            <div class="polaroid-frame">
+                <img id="memory-img" src="img/foto1.jpg" alt="Nuestro recuerdo">
+                <div class="progress-container">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
 
-    <div class="letter" id="letter">
+            <div class="polaroid-info">
+                <h2 id="memory-title" class="romantic-subtitle">Capítulo 1</h2>
+                <p id="memory-text" class="memory-desc"></p>
+            </div>
 
-        <h1>Para Nerea ❤️</h1>
+            <div class="nav-controls">
+                <button id="prevBtn" class="nav-btn">◀ Anterior</button>
+                <button id="nextBtn" class="nav-btn">Siguiente ▶</button>
+            </div>
 
-        <p id="typewriter"></p>
+            <button id="toPart3Btn" class="primary-btn hidden-element" style="margin-top: 15px;">
+                ✨ Leer el mensaje final ✨
+            </button>
+        </div>
+    </section>
 
-        <span id="cursor">|</span>
+    <section id="part3" style="display: none;">
+        <div class="card glass">
+            <h1 class="romantic-title">Para siempre nosotros ❤️</h1>
+            <div class="text-container">
+                <p id="typewriter2"></p><span class="cursor">|</span>
+            </div>
+            <button id="finalSurpriseBtn" class="primary-btn hidden-element">
+                💝 ¡Te amo con locura! 💝
+            </button>
+        </div>
+    </section>
 
-        <button id="startButton">
-
-            ❤️ Comenzar nuestro viaje ❤️
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================
-RECUERDOS
-=========================== -->
-
-<section id="memorySection">
-
-    <div class="memoryCard">
-
-        <img
-            id="memoryImage"
-            src=""
-            alt="Recuerdo">
-
-        <h2 id="memoryTitle"></h2>
-
-        <p id="memoryText"></p>
-
-        <button id="nextMemory">
-
-            ❤️ Siguiente recuerdo ❤️
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================
-CARTA FINAL
-=========================== -->
-
-<section id="finalSection">
-
-    <div class="letter">
-
-        <h1>Para siempre nosotros ❤️</h1>
-
-        <p id="finalText"></p>
-
-        <button id="finishButton">
-
-            ❤️ Feliz cumpleaños mi vida ❤️
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ==========================
-TEXTO INICIAL
-=========================== -->
-
-<script>
-
-const textoInicial = `Feliz 21 cumpleaños, mi amor. ❤️
-
-Este año quería regalarte algo un poco diferente. No quería que este día se quedara solo en un regalo material, porque siento que lo más valioso que tenemos es todo lo que hemos vivido juntos.
-
-Por eso he querido preparar este pequeño viaje por nuestra historia. Un recorrido por las etapas, los momentos, las risas, las aventuras y todos esos recuerdos que llevo guardados con tanto cariño. Quiero que, mientras avances, puedas volver a sentir todo lo bonito que hemos construido juntos.
-
-Espero de corazón que te guste y que lo disfrutes tanto como yo he disfrutado preparándolo para ti.
-
-Gracias por hacer mi vida mucho más feliz y por ser la persona con la que quiero seguir creando miles de recuerdos más.
-
-Te amo con todo mi corazón.
-
-Feliz cumpleaños, mi vida. ❤️`;
-
-</script>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
-
 </html>
