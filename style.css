@@ -1,13 +1,17 @@
 /* ==========================================================================
-   VARIABLES Y CONFIGURACIÓN GENERAL
+   DISEÑO Y PALETA DE COLORES ROMÁNTICOS
    ========================================================================== */
 :root {
-    --color-fondo-gradiente: linear-gradient(135deg, #fff5f6 0%, #ffe3e8 100%);
-    --color-principal: #ff4d6d;
-    --color-secundario: #ff85a1;
-    --color-dorado: #d4af37;
-    --color-texto: #4a3e40;
-    --color-tarjeta: rgba(255, 255, 255, 0.75);
+    --color-fondo-gradiente: linear-gradient(135deg, #fff2f4 0%, #ffdee4 50%, #ffd0d8 100%);
+    --color-principal: #e63946;
+    --color-principal-hover: #c32f3c;
+    --color-secundario: #ff758f;
+    --color-dorado: #dfb72c;
+    --color-texto: #3a2b2e;
+    --color-vidrio: rgba(255, 255, 255, 0.45);
+    --borde-vidrio: rgba(255, 255, 255, 0.6);
+    --sombra-elegante: 0 15px 35px rgba(230, 57, 70, 0.08);
+    
     --fuente-elegante: 'Playfair Display', serif;
     --fuente-lectura: 'Quicksand', sans-serif;
 }
@@ -25,10 +29,11 @@ body, html {
     font-family: var(--fuente-lectura);
     background: var(--color-fondo-gradiente);
     color: var(--color-texto);
+    user-select: none; /* Previene selecciones accidentales que rompan la estética */
 }
 
 /* ==========================================================================
-   ELEMENTOS DE FONDO Y ESTRUCTURA DE PANTALLAS
+   CANVAS DE PARTÍCULAS
    ========================================================================== */
 #canvas-particulas {
     position: fixed;
@@ -47,7 +52,9 @@ body, html {
     z-index: 2;
 }
 
-/* Sistema de pantallas SPA (transición suave) */
+/* ==========================================================================
+   PANTALLAS Y DISEÑO GLASSMORPHISM
+   ========================================================================== */
 .pantalla {
     position: absolute;
     top: 0;
@@ -57,96 +64,169 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 24px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 1.5s ease-in-out;
+    transform: scale(1.03);
+    transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .pantalla.activa {
     opacity: 1;
     pointer-events: auto;
+    transform: scale(1);
 }
 
-/* Tarjeta contenedora de contenido */
-.contenido-pantalla {
-    background: var(--color-tarjeta);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 40px 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 182, 193, 0.4);
-    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.08);
-    text-align: center;
-    max-width: 600px;
+/* Tarjeta elegante de la carta (Efecto Vidrio / Glassmorphism) */
+.tarjeta-carta {
+    background: var(--color-vidrio);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--borde-vidrio);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--sombra-elegante);
     width: 100%;
-    transform: translateY(0);
-    transition: transform 0.5s ease;
+    max-width: 680px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Área scrollable para móviles y pantallas pequeñas */
+.scroll-carta {
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-right: 10px;
+}
+
+/* Scrollbar sutil y decorado */
+.scroll-carta::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-carta::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+.scroll-carta::-webkit-scrollbar-thumb {
+    background: rgba(230, 57, 70, 0.2);
+    border-radius: 10px;
 }
 
 /* ==========================================================================
-   TIPOGRAFÍAS Y EFECTOS
+   TIPOGRAFÍAS Y CARTA ESCRITA
    ========================================================================== */
-.texto-romantico {
+.texto-carta {
     font-family: var(--fuente-elegante);
-    font-size: 2.2rem;
-    font-weight: 500;
-    color: var(--color-principal);
-    line-height: 1.4;
-    margin-bottom: 30px;
-    min-height: 120px; /* Evita saltos de layout durante la escritura */
+    font-size: 1.35rem;
+    line-height: 1.7;
+    color: var(--color-texto);
+    text-align: left;
+    white-space: pre-wrap; /* Mantiene saltos de línea del string */
 }
 
-/* Cursor de la máquina de escribir */
-.texto-romantico::after {
-    content: '|';
-    margin-left: 5px;
+/* Cursor de máquina de escribir elegante */
+.cursor-activo::after {
+    content: '❘';
+    font-weight: 200;
     color: var(--color-principal);
-    animation: parpadeo-cursor 0.8s infinite;
+    margin-left: 2px;
+    animation: parpadeo 0.8s infinite;
+}
+
+/* Transición para ocultar el cursor */
+.cursor-desvanecer::after {
+    content: '❘';
+    color: var(--color-principal);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+/* Estilo para la portada inicial */
+.carta-portada {
+    background: var(--color-vidrio);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--borde-vidrio);
+    padding: 50px 30px;
+    border-radius: 24px;
+    box-shadow: var(--sombra-elegante);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.icono-regalo {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: flotar 3s ease-in-out infinite;
+}
+
+.titulo-portada {
+    font-family: var(--fuente-elegante);
+    font-size: 1.8rem;
+    color: var(--color-principal);
+    margin-bottom: 12px;
+}
+
+.subtitulo-portada {
+    font-size: 1.05rem;
+    color: #6a5558;
+    margin-bottom: 35px;
 }
 
 .subtitulo-romantico {
     font-family: var(--fuente-elegante);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--color-principal);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .texto-suave {
     font-size: 1.1rem;
-    color: var(--color-texto);
     line-height: 1.6;
+    text-align: center;
 }
 
 /* ==========================================================================
-   BOTONES Y COMPONENTES INTERACTIVOS
+   BOTONES E INTERACCIONES
    ========================================================================== */
+.contenedor-boton-carta {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
 .boton-elegante {
     font-family: var(--fuente-lectura);
     font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: 1px;
+    font-size: 1.05rem;
     color: #ffffff;
     background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
     border: none;
-    padding: 15px 35px;
+    padding: 16px 36px;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease;
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.35);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s ease, 
+                opacity 1.5s ease;
     outline: none;
 }
 
 .boton-elegante:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.5);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(230, 57, 70, 0.5);
 }
 
 .boton-elegante:active {
-    transform: translateY(-1px);
+    transform: translateY(-1px) scale(0.99);
 }
 
-/* Clases de animación */
+/* Clases utilitarias de animación */
 .oculto {
     opacity: 0;
     pointer-events: none;
@@ -158,32 +238,59 @@ body, html {
 }
 
 /* ==========================================================================
-   ANIMACIONES KEYFRAMES
+   ANIMACIONES (KEYFRAMES)
    ========================================================================== */
-@keyframes parpadeo-cursor {
+@keyframes parpadeo {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
 
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.pulsar-suave {
+    animation: pulso 2s infinite;
+}
+
+@keyframes pulso {
+    0%, 100% { box-shadow: 0 8px 25px rgba(230, 57, 70, 0.35); }
+    50% { box-shadow: 0 8px 35px rgba(230, 57, 70, 0.6); }
+}
+
 /* ==========================================================================
-   DISEÑO RESPONSIVO (MOBILE FIRST)
+   DISEÑO ADAPTADO A MÓVILES (RESPONSIVE)
    ========================================================================== */
 @media (max-width: 600px) {
-    .contenido-pantalla {
-        padding: 30px 20px;
+    .tarjeta-carta {
+        padding: 24px 20px;
+        max-height: 90vh;
     }
-
-    .texto-romantico {
-        font-size: 1.6rem;
-        min-height: 150px;
+    
+    .texto-carta {
+        font-size: 1.15rem;
+        line-height: 1.6;
     }
-
+    
+    .scroll-carta {
+        max-height: 65vh;
+    }
+    
+    .carta-portada {
+        padding: 35px 20px;
+    }
+    
+    .titulo-portada {
+        font-size: 1.5rem;
+    }
+    
     .subtitulo-romantico {
         font-size: 1.8rem;
     }
-
+    
     .boton-elegante {
-        padding: 12px 25px;
-        font-size: 0.9rem;
+        padding: 14px 28px;
+        font-size: 0.95rem;
     }
 }
