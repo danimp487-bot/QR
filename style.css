@@ -1,423 +1,368 @@
-/* =======================================
-RESET Y BASE
-======================================= */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ==========================================================================
+   CONFIGURACIÓN GENERAL
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+:root {
+    --bg-color-1: #fff1f3;
+    --bg-color-2: #ffe3e8;
+    --primary-gradient: linear-gradient(135deg, #ff7597, #ff4d6d);
+    --primary-color: #ff4d6d;
+    --text-dark: #4a3e41;
+    --text-muted: #756366;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 182, 193, 0.4);
+    --shadow-soft: 0 10px 30px rgba(255, 77, 109, 0.12);
 }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:#fdeff4;
-    overflow:hidden;
-    width:100vw;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--bg-color-1) 0%, var(--bg-color-2) 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
 }
 
-/* =======================================
-FONDO
-======================================= */
-.background{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at top,#ffd7e6 0%,transparent 40%),
-    radial-gradient(circle at bottom,#ffe8d7 0%,transparent 45%),
-    linear-gradient(135deg,#fff7fb,#ffe8ef,#ffdce8);
-    z-index:-5;
-}
-
-/* =======================================
-PÉTALOS Y CORAZONES FLOTANTES
-======================================= */
-#petals{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:-4;
-}
-
-.petal{
-    position:absolute;
-    width:18px;
-    height:18px;
-    background:#ffbfd5;
-    border-radius:60% 40% 60% 40%;
-    opacity:.75;
-    animation-name:fall;
-    animation-timing-function:linear;
-    animation-fill-mode:forwards;
-}
-
-@keyframes fall{
-    from{ transform: translateY(-40px) rotate(0deg); }
-    to{ transform: translateY(120vh) translateX(120px) rotate(720deg); }
-}
-
-.heart{
-    position:fixed;
-    bottom:-50px;
-    color:#ff7aa8;
-    font-size:22px;
-    animation:floatHeart linear forwards;
-    pointer-events:none;
-    z-index:-1;
-}
-
-@keyframes floatHeart{
-    0%{ transform:translateY(0) scale(.6); opacity:0; }
-    20%{ opacity:.8; }
-    100%{ transform:translateY(-120vh) rotate(360deg) scale(1.4); opacity:0; }
-}
-
-/* =======================================
-SECCIONES
-======================================= */
-section{
-    position:absolute;
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:25px;
-}
-
-#memorySection, #finalSection{
-    display:none;
-}
-
-/* =======================================
-CARTA INICIAL (FÍSICA DE SURGIMIENTO)
-======================================= */
-#intro .letter {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.1) translateY(200px);
-    transition: transform 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.5s, visibility 1.5s;
-    z-index: 105;
-}
-
-/* Clase que se activa desde JS para hacer surgir la carta */
-#intro .letter.active {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1) translateY(0);
-}
-
-.letter{
-    width:100%;
-    max-width:420px;
-    background:rgba(255,255,255,.94);
-    border-radius:28px;
-    padding:35px 28px;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
-    text-align:center;
-    backdrop-filter:blur(10px);
-}
-
-/* TÍTULOS Y TEXTOS */
-.letter h1{
-    font-family:'Great Vibes',cursive;
-    font-size:3rem;
-    color:#d85c8b;
-    margin-bottom:25px;
-    font-weight:400;
-}
-
-#typewriter{
-    color:#555;
-    font-size:1rem;
-    line-height:2;
-    white-space:pre-wrap;
-    min-height:310px;
-}
-
-#cursor{
-    display:inline-block;
-    font-size:28px;
-    color:#d85c8b;
-    animation:cursor .8s infinite;
-}
-
-@keyframes cursor{
-    50%{ opacity:0; }
-}
-
-/* BOTONES */
-#startButton{
-    display:none;
-    margin-top:35px;
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(135deg,#ff8fb3,#ff5d95);
-    color:white;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
-    box-shadow:0 12px 30px rgba(255,105,180,.35);
-}
-
-#startButton:hover{
-    transform:translateY(-3px);
-    box-shadow:0 18px 40px rgba(255,105,180,.45);
-}
-
-#startButton.show{
-    display:block;
-    animation:aparecer .8s ease;
-}
-
-@keyframes aparecer{
-    from{ opacity:0; transform:translateY(20px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
-/* =======================================
-RECUERDOS (FOTOS POLAROID)
-======================================= */
-.memoryCard{
-    width:100%;
-    max-width:420px;
-    background:rgba(255,255,255,.96);
-    border-radius:28px;
-    padding:22px;
-    text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
-    animation:mostrarRecuerdo .8s ease;
-    transition:.5s;
-    position:relative;
-}
-
-.memoryCard:hover{
-    transform:translateY(-8px);
-}
-
-#memoryImage{
-    width:100%;
-    aspect-ratio:4/5;
-    object-fit:cover;
-    border-radius:20px;
-    border:8px solid white;
-    box-shadow:0 12px 30px rgba(0,0,0,.18);
-    margin-bottom:22px;
-    transition:.5s;
-}
-
-#memoryImage:hover{
-    transform:scale(1.02) rotate(-1deg);
-}
-
-#memoryTitle{
-    font-family:'Great Vibes',cursive;
-    font-size:2.3rem;
-    color:#d85c8b;
-    margin-bottom:15px;
-}
-
-#memoryText{
-    color:#555;
-    font-size:1rem;
-    line-height:1.9;
-    margin-bottom:30px;
-    white-space:pre-wrap;
-}
-
-#nextMemory{
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(135deg,#ff8fb3,#ff5d95);
-    color:white;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
-    box-shadow:0 12px 25px rgba(255,105,180,.35);
-}
-
-#nextMemory:hover{
-    transform:translateY(-3px);
-    box-shadow:0 18px 35px rgba(255,105,180,.45);
-}
-
-@keyframes mostrarRecuerdo{
-    from{ opacity:0; transform:translateY(30px) scale(.95); }
-    to{ opacity:1; transform:translateY(0) scale(1); }
-}
-
-/* =======================================
-CARTA FINAL
-======================================= */
-#finalSection .letter{
-    max-width:430px;
-    animation:subirFinal 1.2s ease;
-}
-
-#finalText{
-    color:#555;
-    font-size:1rem;
-    line-height:2;
-    white-space:pre-wrap;
-    min-height:260px;
-}
-
-#finishButton{
-    margin-top:35px;
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(135deg,#ff6fa5,#ff4f88);
-    color:white;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.35s;
-    box-shadow:0 12px 30px rgba(255,105,180,.35);
-}
-
-#finishButton:hover{
-    transform:translateY(-3px) scale(1.03);
-    box-shadow:0 18px 40px rgba(255,105,180,.45);
-}
-
-/* =======================================
-TRANSICIONES DE PANTALLA
-======================================= */
-.ocultar{
-    animation:desaparecer .8s forwards;
-}
-
-.mostrar{
-    animation:aparecerPantalla .8s forwards;
-}
-
-@keyframes desaparecer{
-    from{ opacity:1; transform:scale(1); }
-    to{ opacity:0; transform:scale(.95); }
-}
-
-@keyframes aparecerPantalla{
-    from{ opacity:0; transform:translateY(20px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
-@keyframes subirFinal{
-    from{ opacity:0; transform:translateY(40px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
-/* =======================================
-ESTILOS DEL SOBRE / CORAZÓN PORTADA
-======================================= */
-#heartContainer{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:100;
-    transition: opacity 1.5s ease, transform 1.5s ease;
-}
-
-/* Al abrirse, el corazón se vuelve translúcido y escala al fondo */
-#heartContainer.fade {
-    opacity: 0.15;
-    transform: scale(0.65) translateY(80px);
+/* ==========================================================================
+   PÉTALOS Y DESTELLOS FLOTANTES (FONDO)
+   ========================================================================== */
+#petals-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
-#heart{
-    position:relative;
-    width:240px;
-    height:220px;
-    animation:heartbeat 1.6s infinite;
+.petal {
+    position: absolute;
+    pointer-events: none;
+    animation: fall linear forwards;
+    user-select: none;
 }
 
-#heart.stop-beat {
-    animation: none; /* Detiene el latido al abrirse */
-}
-
-.left, .right{
-    position:absolute;
-    width:120px;
-    height:180px;
-    background:#ff5c8a;
-    border-radius:120px 120px 0 0;
-    transition:1.4s cubic-bezier(.25,.8,.25,1);
-    box-shadow:0 10px 25px rgba(255,92,138,.35);
-}
-
-.left{
-    left:0;
-    bottom:0;
-    transform-origin:100% 100%;
-    transform:rotate(-45deg);
-}
-
-.right{
-    right:0;
-    bottom:0;
-    transform-origin:0% 100%;
-    transform:rotate(45deg);
-}
-
-/* Rotación para simular que abrimos el "sobre" */
-.left.open{
-    transform:rotate(-130deg);
-}
-
-.right.open{
-    transform:rotate(130deg);
-}
-
-@keyframes heartbeat{
-    0%{ transform:scale(1); }
-    50%{ transform:scale(1.08); }
-    100%{ transform:scale(1); }
-}
-
-/* =======================================
-RESPONSIVE
-======================================= */
-@media(max-width:480px){
-    .letter, .memoryCard{
-        width:95%;
-        padding:20px;
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) translateX(0) rotate(0deg);
+        opacity: 0;
     }
-    .letter h1{ font-size:2.5rem; }
-    #memoryTitle{ font-size:2rem; }
-    #typewriter, #memoryText, #finalText{ font-size:.95rem; line-height:1.8; }
-    #startButton, #nextMemory, #finishButton{ font-size:16px; padding:15px; }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) translateX(150px) rotate(720deg);
+        opacity: 0;
+    }
 }
 
-@media(max-height:700px){
-    .letter{ padding:22px; }
-    .letter h1{ font-size:2.4rem; }
-    #typewriter{ min-height:220px; line-height:1.8; }
+/* ==========================================================================
+   MÚSICA FLOTANTE (REPRODUCTOR)
+   ========================================================================== */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-soft);
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
 
-/* =======================================
-INTERRUPCIONES DE SCROLL Y SELECCIÓN
-======================================= */
-::-webkit-scrollbar{ width:8px; }
-::-webkit-scrollbar-thumb{ background:#f59fbe; border-radius:20px; }
-::-webkit-scrollbar-track{ background:transparent; }
-::selection{ background:#ffb5cf; color:white; }
-button:active{ transform:scale(.96); }
-img{ user-select:none; -webkit-user-drag:none; }
+.music-btn:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+.music-playing {
+    animation: rotateDisk 3s linear infinite;
+}
+
+@keyframes rotateDisk {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   ESTRUCTURA DE TARJETAS (GLASSMORPHISM)
+   ========================================================================== */
+section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 10;
+    transition: opacity 0.6s ease;
+}
+
+.card {
+    width: 100%;
+    max-width: 440px;
+    padding: 35px 25px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.5s ease;
+}
+
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* ==========================================================================
+   TÍTULOS Y TEXTOS
+   ========================================================================== */
+.romantic-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.romantic-subtitle {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.3rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.text-container {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    min-height: 250px;
+    text-align: left;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    max-height: 380px;
+    padding-right: 5px;
+}
+
+/* Scroll sutil de la carta si es un móvil muy pequeño */
+.text-container::-webkit-scrollbar {
+    width: 4px;
+}
+.text-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 77, 109, 0.3);
+    border-radius: 4px;
+}
+
+.cursor {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   BOTONES PREMIUM
+   ========================================================================== */
+.primary-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 50px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 77, 109, 0.45);
+}
+
+.primary-btn:active {
+    transform: translateY(-1px);
+}
+
+.hidden-element {
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.visible-element {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ==========================================================================
+   DISEÑO POLAROID (PARTE 2)
+   ========================================================================== */
+.polaroid-card {
+    padding: 18px;
+    position: relative;
+}
+
+.counter {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.polaroid-frame {
+    background: white;
+    padding: 12px 12px 22px 12px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    position: relative;
+    width: 100%;
+}
+
+.polaroid-frame img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    transition: opacity 0.4s ease;
+}
+
+/* Barra de carga de los 10 segundos */
+.progress-container {
+    width: calc(100% - 24px);
+    height: 4px;
+    background: #f1f1f1;
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--primary-gradient);
+}
+
+.polaroid-info {
+    margin-top: 15px;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.memory-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Botones de navegación manual */
+.nav-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background: white;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE LLUVIA DE CORAZONES FINALES
+   ========================================================================== */
+.falling-heart {
+    position: fixed;
+    font-size: 25px;
+    pointer-events: none;
+    z-index: 999;
+    animation: flyUp linear forwards;
+}
+
+@keyframes flyUp {
+    0% {
+        transform: translateY(105vh) scale(0.5) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-15vh) scale(1.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   DISEÑO RESPONSIVO
+   ========================================================================== */
+@media (max-width: 480px) {
+    .card {
+        width: 95%;
+        padding: 25px 15px;
+    }
+    .romantic-title { font-size: 2.6rem; }
+    .romantic-subtitle { font-size: 2rem; }
+    .text-container { min-height: 280px; font-size: 0.95rem; }
+}
+
+@media (max-height: 680px) {
+    .card { padding: 15px; }
+    .romantic-title { font-size: 2.2rem; margin-bottom: 10px; }
+    .text-container { min-height: 180px; max-height: 200px; }
+    .polaroid-frame img { aspect-ratio: 1/1; }
+    .polaroid-info { min-height: 80px; }
+}
