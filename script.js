@@ -160,7 +160,7 @@ window.onload = () => {
 let currentMemoryIndex = 0;
 let slideshowTimer = null;
 let progressTimer = null;
-const SLIDE_DURATION = 10000; // 10 segundos
+const SLIDE_DURATION = 15000; // 10 segundos
 
 function startSlideshow() {
     loadMemory(0);
