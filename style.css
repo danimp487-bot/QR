@@ -169,16 +169,13 @@ CARTA INICIAL
 
     padding:35px 28px;
 
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.15);
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
 
     text-align:center;
 
     backdrop-filter:blur(10px);
 
-    animation:subir 1.3s ease;
-
-    transition:opacity .8s ease;
+    transition:1s;
 
 }
 
@@ -995,6 +992,85 @@ MÓVILES
         min-height:220px;
 
         line-height:1.8;
+
+    }
+
+}
+
+/*========================
+CORAZÓN DE PAPEL
+========================*/
+
+#heartContainer{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+#heart{
+
+    position:relative;
+
+    width:180px;
+
+    height:160px;
+
+    animation:latido 1.5s infinite;
+
+}
+
+.left,
+.right{
+
+    position:absolute;
+
+    width:90px;
+
+    height:145px;
+
+    background:#ff6f91;
+
+    border-radius:90px 90px 0 0;
+
+    transition:1.2s;
+
+}
+
+.left{
+
+    left:45px;
+
+    transform-origin:left bottom;
+
+    transform:rotate(-45deg);
+
+}
+
+.right{
+
+    right:45px;
+
+    transform-origin:right bottom;
+
+    transform:rotate(45deg);
+
+}
+
+@keyframes latido{
+
+    50%{
+
+        transform:scale(1.08);
 
     }
 
