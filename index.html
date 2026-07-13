@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Cumpleaños, Mi Amor ❤️</title>
+    <!-- Fuentes Románticas y Elegantes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -11,14 +12,20 @@
 </head>
 <body>
 
+    <!-- Música de fondo ininterrumpida -->
     <audio id="bgMusic" loop>
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Control de música flotante -->
     <button id="musicToggle" class="music-btn" aria-label="Reproducir/Pausar música">🎵</button>
 
+    <!-- Fondo dinámico de pétalos y estrellas -->
     <div id="petals-container"></div>
 
+    <!-- ==========================================
+         PARTE 1: INTRODUCCIÓN (CARTA DE INICIO)
+         ========================================== -->
     <section id="part1" class="active-section">
         <div class="card glass">
             <h1 class="romantic-title">Para Nerea ❤️</h1>
@@ -31,33 +38,44 @@
         </div>
     </section>
 
+    <!-- ==========================================
+         PARTE 2: GALERÍA DE 13 RECUERDOS (10s CADA UNO)
+         ========================================== -->
     <section id="part2" style="display: none;">
         <div class="card glass polaroid-card">
+            <!-- Indicador numérico de recuerdo -->
             <div id="memory-counter" class="counter">1 / 13</div>
             
+            <!-- Foto estilo polaroid con marco grueso -->
             <div class="polaroid-frame">
                 <img id="memory-img" src="img/foto1.jpg" alt="Nuestro recuerdo">
+                <!-- Barra de progreso visual para el temporizador de 10 segundos -->
                 <div class="progress-container">
                     <div id="progress-bar"></div>
                 </div>
             </div>
 
             <div class="polaroid-info">
-                <h2 id="memory-title" class="romantic-subtitle">Capítulo 1</h2>
+                <!-- Se ha eliminado el título del capítulo para dejar solo el texto -->
                 <p id="memory-text" class="memory-desc"></p>
             </div>
 
+            <!-- Controles manuales opcionales -->
             <div class="nav-controls">
                 <button id="prevBtn" class="nav-btn">◀ Anterior</button>
                 <button id="nextBtn" class="nav-btn">Siguiente ▶</button>
             </div>
 
+            <!-- Botón para avanzar a la última parte (Aparece en la foto 13) -->
             <button id="toPart3Btn" class="primary-btn hidden-element" style="margin-top: 15px;">
                 ✨ Leer el mensaje final ✨
             </button>
         </div>
     </section>
 
+    <!-- ==========================================
+         PARTE 3: CARTA Y MENSAJE FINAL
+         ========================================== -->
     <section id="part3" style="display: none;">
         <div class="card glass">
             <h1 class="romantic-title">Para siempre nosotros ❤️</h1>
