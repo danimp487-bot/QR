@@ -38,7 +38,7 @@ let indiceTexto = 0;
 let recuerdoActual = 0;
 
 // ======================================
-// LOS 13 RECUERDOS
+// LOS 13 RECUERDOS (Personalízalos aquí)
 // ======================================
 const recuerdos = [
     {
@@ -111,7 +111,7 @@ const recuerdos = [
 // ======================================
 // TEXTO FINAL
 // ======================================
-const mensajeFinal = `Nerea, escribir aquí tu mensaje final de cumpleaños de la forma más romántica y bonita posible para cerrar el viaje por vuestros recuerdos. ❤️`;
+const mensajeFinal = `Nerea, escribe aquí tu mensaje final de cumpleaños de la forma más romántica y bonita posible para cerrar el viaje por vuestros recuerdos. ❤️`;
 
 // ======================================
 // EFECTO MÁQUINA DE ESCRIBIR (TEXTO INICIAL)
@@ -120,7 +120,7 @@ function escribirTexto() {
     if (indiceTexto < texto.length) {
         typewriter.innerHTML += texto.charAt(indiceTexto);
         indiceTexto++;
-        setTimeout(escribirTexto, 35); // Velocidad de escritura en milisegundos
+        setTimeout(escribirTexto, 35); // Velocidad de escritura (ms)
     } else {
         cursor.style.display = "none";
         startButton.classList.add("show");
@@ -155,7 +155,6 @@ function cargarRecuerdo() {
 
 // Botón de comenzar viaje
 startButton.addEventListener("click", () => {
-    // Intentar reproducir música de nuevo en caso de que el navegador la bloqueara al inicio
     music.play().catch(() => {});
     
     intro.classList.add("ocultar");
@@ -171,7 +170,6 @@ startButton.addEventListener("click", () => {
 nextMemory.addEventListener("click", () => {
     recuerdoActual++;
     if (recuerdoActual < recuerdos.length) {
-        // Animación suave de transición al cambiar de tarjeta de recuerdo
         const card = document.querySelector(".memoryCard");
         card.style.opacity = "0";
         card.style.transform = "translateY(20px) scale(0.95)";
@@ -182,7 +180,6 @@ nextMemory.addEventListener("click", () => {
             card.style.transform = "translateY(0) scale(1)";
         }, 400);
     } else {
-        // Transición a la sección final
         memorySection.classList.add("ocultar");
         setTimeout(() => {
             memorySection.style.display = "none";
@@ -195,7 +192,6 @@ nextMemory.addEventListener("click", () => {
 
 // Botón de finalizar
 finishButton.addEventListener("click", () => {
-    // Lluvia masiva de corazones sorpresa al hacer clic al final
     for (let i = 0; i < 40; i++) {
         setTimeout(crearCorazon, i * 80);
     }
@@ -213,10 +209,10 @@ function crearPetalo() {
     petal.classList.add("petal");
     
     petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = Math.random() * 4 + 5 + "s"; // entre 5 y 9 segundos de caída
+    petal.style.animationDuration = Math.random() * 4 + 5 + "s";
     petal.style.opacity = Math.random() * 0.4 + 0.6;
     
-    const size = Math.random() * 8 + 12; // tamaños variados de pétalos
+    const size = Math.random() * 8 + 12;
     petal.style.width = size + "px";
     petal.style.height = size + "px";
     
@@ -233,9 +229,9 @@ function crearCorazon() {
     heartElement.innerHTML = "❤️";
     
     heartElement.style.left = Math.random() * 100 + "vw";
-    heartElement.style.animationDuration = Math.random() * 3 + 4 + "s"; // entre 4 y 7 segundos de vuelo
+    heartElement.style.animationDuration = Math.random() * 3 + 4 + "s";
     
-    const size = Math.random() * 12 + 14; // tamaños variados de corazones
+    const size = Math.random() * 12 + 14;
     heartElement.style.fontSize = size + "px";
     
     document.body.appendChild(heartElement);
@@ -245,36 +241,44 @@ function crearCorazon() {
     }, 7000);
 }
 
-// Intervalos continuos para mantener viva la pantalla
 setInterval(crearPetalo, 400);
 setInterval(crearCorazon, 800);
 
 // ======================================
-// AL CARGAR LA PÁGINA
+// TIMELINE AL CARGAR LA PÁGINA (NUEVA FÍSICA)
 // ======================================
 window.onload = () => {
-    // Intentar reproducir música de fondo
-    music.play().catch(() => {
-        console.log("La reproducción automática de música está esperando una interacción del usuario.");
-    });
+    music.play().catch(() => {});
 
-    // Animación inicial del corazón abriéndose a los lados
+    // 1. A los 2 segundos: Detener el latido y abrir las solapas del corazón
     setTimeout(() => {
         const leftPart = document.querySelector(".left");
         const rightPart = document.querySelector(".right");
+        const heartElement = document.getElementById("heart");
+
         if (leftPart && rightPart) {
-            leftPart.style.transform = "rotate(-130deg)";
-            rightPart.style.transform = "rotate(130deg)";
+            leftPart.classList.add("open");
+            rightPart.classList.add("open");
+        }
+        if (heartElement) {
+            heartElement.classList.add("open"); // Detiene la animación de latido
         }
     }, 2000);
 
-    // Ocultar el corazón y revelar la carta con el typewriter
+    // 2. A los 3.5 segundos: Hacer que la carta emerja del corazón y el corazón se atenúe
     setTimeout(() => {
-        heartContainer.style.display = "none";
-        letter.style.display = "block";
+        if (heartContainer) {
+            heartContainer.classList.add("fade"); // Encoge y transparenta el corazón de fondo
+        }
+        if (letter) {
+            letter.style.display = "block";
+            letter.classList.add("emerge"); // Activa la animación física de salida
+        }
+
+        // 3. Justo cuando la carta termina de subir (1.5s después), empieza a escribirse el texto
         setTimeout(() => {
-            letter.style.opacity = "1";
             escribirTexto();
-        }, 100);
-    }, 3200);
+        }, 1500);
+
+    }, 3500);
 };
