@@ -99,15 +99,7 @@ boton.addEventListener("click", () => {
 
     boton.style.transform = "scale(0.95)";
 
-    setTimeout(() => {
-
-        boton.style.transform = "scale(1)";
-
-        mostrarSegundaPantalla();
-
-    }, 150);
-
-    setTimeout(() => {
+setTimeout(() => {
 
     cursor.style.display = "none";
 
