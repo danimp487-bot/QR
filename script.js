@@ -1,130 +1,157 @@
-// ================================
+// =======================
 // ELEMENTOS
-// ================================
+// =======================
+
+const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
 
 const textoElemento = document.getElementById("typewriter");
 const cursor = document.getElementById("cursor");
 const boton = document.getElementById("nextButton");
+
 const musica = document.getElementById("bgMusic");
 
-// Texto definido en el HTML
+// =======================
+// VARIABLES
+// =======================
+
 let indice = 0;
-const velocidad = 35; // milisegundos por letra
+const velocidad = 32;
 
-// ================================
-// EFECTO MÁQUINA DE ESCRIBIR
-// ================================
-
-function escribirTexto() {
-
-    if (indice < texto.length) {
-
-        const letra = texto.charAt(indice);
-
-        // Mantener saltos de línea
-        if (letra === "\n") {
-            textoElemento.innerHTML += "<br><br>";
-        } else {
-            textoElemento.innerHTML += letra;
-        }
-
-        indice++;
-
-        setTimeout(escribirTexto, velocidad);
-
-    } else {
-
-        // Esperar un poco al terminar
-        setTimeout(() => {
-
-            cursor.style.opacity = "0";
-
-            boton.classList.add("mostrar");
-
-        }, 2000);
-
-    }
-
-}
-
-// ================================
-// MÚSICA
-// ================================
-
-function iniciarMusica() {
-
-    musica.volume = 0.35;
-
-    musica.play().catch(() => {
-
-        // Si el navegador bloquea el autoplay,
-        // comenzará cuando el usuario haga clic.
-
-        document.addEventListener("click", () => {
-            musica.play();
-        }, { once: true });
-
-    });
-
-}
-
-// ================================
-// CAMBIO DE PANTALLA
-// ================================
-
-function mostrarSegundaPantalla() {
-
-    document.body.classList.add("fadeOut");
-
-    setTimeout(() => {
-
-        // Aquí construiremos la segunda pantalla.
-        // De momento solo aparece un mensaje.
-
-        document.body.innerHTML = `
-            <div class="segundaPantalla">
-                <h1>Próximamente... ❤️</h1>
-            </div>
-        `;
-
-    }, 1000);
-
-}
-
-// ================================
-// BOTÓN
-// ================================
-
-boton.addEventListener("click", () => {
-
-    boton.style.transform = "scale(0.95)";
-
-setTimeout(() => {
-
-    cursor.style.display = "none";
-
-    boton.style.display = "block";
-
-    setTimeout(() => {
-        boton.classList.add("mostrar");
-    },100);
-
-},2000);
-
-});
-
-// ================================
-// INICIO
-// ================================
+// =======================
+// ABRIR SOBRE
+// =======================
 
 window.addEventListener("load", () => {
 
     iniciarMusica();
 
+    // Espera un poco antes de abrir el sobre
     setTimeout(() => {
 
-        escribirTexto();
+        envelope.classList.add("open");
 
-    }, 700);
+        // Espera a que salga la carta
+        setTimeout(() => {
+
+            escribirTexto();
+
+        },1800);
+
+    },1200);
 
 });
+
+// =======================
+// EFECTO ESCRITURA
+// =======================
+
+function escribirTexto(){
+
+    if(indice < texto.length){
+
+        const letra = texto.charAt(indice);
+
+        if(letra === "\n"){
+
+            textoElemento.innerHTML += "<br><br>";
+
+        }else{
+
+            textoElemento.innerHTML += letra;
+
+        }
+
+        indice++;
+
+        setTimeout(escribirTexto,velocidad);
+
+    }else{
+
+        finalizarCarta();
+
+    }
+
+}
+
+// =======================
+// TERMINAR CARTA
+// =======================
+
+function finalizarCarta(){
+
+    cursor.style.display="none";
+
+    setTimeout(()=>{
+
+        boton.classList.add("show");
+
+    },1200);
+
+}
+
+// =======================
+// BOTÓN
+// =======================
+
+boton.addEventListener("click",()=>{
+
+    boton.disabled=true;
+
+    document.body.classList.add("fade");
+
+    setTimeout(()=>{
+
+        mostrarSegundaPantalla();
+
+    },1200);
+
+});
+
+// =======================
+// SEGUNDA PANTALLA
+// =======================
+
+function mostrarSegundaPantalla(){
+
+    alert("Aquí empezará nuestro viaje ❤️");
+
+}
+
+// =======================
+// MÚSICA
+// =======================
+
+function iniciarMusica(){
+
+    musica.volume=0;
+
+    musica.play().catch(()=>{
+
+        document.addEventListener("click",()=>{
+
+            musica.play();
+
+        },{once:true});
+
+    });
+
+    let volumen=0;
+
+    const fade=setInterval(()=>{
+
+        volumen+=0.02;
+
+        if(volumen>=0.35){
+
+            volumen=0.35;
+
+            clearInterval(fade);
+
+        }
+
+        musica.volume=volumen;
+
+    },120);
+
+}
