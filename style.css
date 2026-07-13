@@ -1,7 +1,6 @@
 /* =======================================
 RESET
 ======================================= */
-
 *{
     margin:0;
     padding:0;
@@ -9,1094 +8,601 @@ RESET
 }
 
 html{
-
     scroll-behavior:smooth;
-
 }
 
 body{
-
     font-family:'Poppins',sans-serif;
-
     background:#fdeff4;
-
     overflow:hidden;
-
     width:100vw;
-
     height:100vh;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     position:relative;
-
 }
 
 /* =======================================
 FONDO
 ======================================= */
-
 .background{
-
     position:fixed;
-
     inset:0;
-
     background:
-
     radial-gradient(circle at top,#ffd7e6 0%,transparent 40%),
-
     radial-gradient(circle at bottom,#ffe8d7 0%,transparent 45%),
-
     linear-gradient(135deg,#fff7fb,#ffe8ef,#ffdce8);
-
     z-index:-5;
-
 }
 
 /* =======================================
 PÉTALOS
 ======================================= */
-
 #petals{
-
     position:fixed;
-
     inset:0;
-
     pointer-events:none;
-
     overflow:hidden;
-
     z-index:-4;
-
 }
 
 .petal{
-
     position:absolute;
-
     width:18px;
-
     height:18px;
-
     background:#ffbfd5;
-
     border-radius:60% 40% 60% 40%;
-
     opacity:.75;
-
     animation-name:fall;
-
     animation-timing-function:linear;
-
     animation-fill-mode:forwards;
-
 }
 
 @keyframes fall{
-
     from{
-
-        transform:
-        translateY(-40px)
-        rotate(0deg);
-
+        transform: translateY(-40px) rotate(0deg);
     }
-
     to{
-
-        transform:
-        translateY(120vh)
-        translateX(120px)
-        rotate(720deg);
-
+        transform: translateY(120vh) translateX(120px) rotate(720deg);
     }
-
 }
 
 /* =======================================
 SECCIONES
 ======================================= */
-
 section{
-
     position:absolute;
-
     width:100%;
-
     height:100%;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:25px;
-
 }
 
 /* Ocultas */
-
 #memorySection,
 #finalSection{
-
     display:none;
-
 }
 
 /* =======================================
-CARTA INICIAL
+CARTA INICIAL (FÍSICA DE SURGIMIENTO)
 ======================================= */
+#intro .letter {
+    position: relative;
+    z-index: 101; /* Asegura estar por encima del corazón */
+}
+
+/* Animación de surgimiento desde el interior del corazón */
+#intro .letter.emerge {
+    display: block;
+    animation: emergeLetter 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes emergeLetter {
+    0% {
+        opacity: 0;
+        transform: scale(0.05) translateY(180px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
 
 .letter{
-
     display:none;
-
     opacity:0;
-
     width:100%;
     max-width:420px;
-
     background:rgba(255,255,255,.94);
-
     border-radius:28px;
-
     padding:35px 28px;
-
     box-shadow:0 15px 40px rgba(0,0,0,.15);
-
     text-align:center;
-
     backdrop-filter:blur(10px);
-
     transition:1s;
-
 }
 
 /* TÍTULO */
-
 .letter h1{
-
     font-family:'Great Vibes',cursive;
-
     font-size:3rem;
-
     color:#d85c8b;
-
     margin-bottom:25px;
-
     font-weight:400;
-
 }
 
 /* TEXTO */
-
 #typewriter{
-
     color:#555;
-
     font-size:1rem;
-
     line-height:2;
-
     white-space:pre-wrap;
-
     min-height:310px;
-
 }
 
 /* CURSOR */
-
 #cursor{
-
     display:inline-block;
-
     font-size:28px;
-
     color:#d85c8b;
-
     animation:cursor .8s infinite;
-
 }
 
 @keyframes cursor{
-
     50%{
-
         opacity:0;
-
     }
-
 }
 
 /* BOTÓN */
-
 #startButton{
-
     display:none;
-
     margin-top:35px;
-
     width:100%;
-
     padding:16px;
-
     border:none;
-
     border-radius:50px;
-
     background:linear-gradient(135deg,#ff8fb3,#ff5d95);
-
     color:white;
-
     font-size:17px;
-
     font-weight:600;
-
     cursor:pointer;
-
     transition:.3s;
-
     box-shadow:0 12px 30px rgba(255,105,180,.35);
-
 }
 
 #startButton:hover{
-
     transform:translateY(-3px);
-
     box-shadow:0 18px 40px rgba(255,105,180,.45);
-
 }
 
 #startButton.show{
-
     display:block;
-
     animation:aparecer .8s ease;
-
 }
 
 @keyframes aparecer{
-
     from{
-
         opacity:0;
-
         transform:translateY(20px);
-
     }
-
     to{
-
         opacity:1;
-
         transform:translateY(0);
-
     }
-
-}
-
-/* ENTRADA */
-
-@keyframes subir{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
 }
 
 /* =======================================
 RECUERDOS
 ======================================= */
-
 .memoryCard{
-
     width:100%;
     max-width:420px;
-
     background:rgba(255,255,255,.96);
-
     border-radius:28px;
-
     padding:22px;
-
     text-align:center;
-
     box-shadow:0 15px 40px rgba(0,0,0,.15);
-
     animation:mostrarRecuerdo .8s ease;
-
 }
 
 /* FOTO */
-
 #memoryImage{
-
     width:100%;
-
     aspect-ratio:4/5;
-
     object-fit:cover;
-
     border-radius:20px;
-
     border:8px solid white;
-
     box-shadow:0 12px 30px rgba(0,0,0,.18);
-
     margin-bottom:22px;
-
     transition:.5s;
-
 }
 
 /* TÍTULO */
-
 #memoryTitle{
-
     font-family:'Great Vibes',cursive;
-
     font-size:2.3rem;
-
     color:#d85c8b;
-
     margin-bottom:15px;
-
 }
 
 /* TEXTO */
-
 #memoryText{
-
     color:#555;
-
     font-size:1rem;
-
     line-height:1.9;
-
     margin-bottom:30px;
-
     white-space:pre-wrap;
-
 }
 
 /* BOTÓN */
-
 #nextMemory{
-
     width:100%;
-
     padding:16px;
-
     border:none;
-
     border-radius:50px;
-
     background:linear-gradient(135deg,#ff8fb3,#ff5d95);
-
     color:white;
-
     font-size:17px;
-
     font-weight:600;
-
     cursor:pointer;
-
     transition:.3s;
-
     box-shadow:0 12px 25px rgba(255,105,180,.35);
-
 }
 
 #nextMemory:hover{
-
     transform:translateY(-3px);
-
     box-shadow:0 18px 35px rgba(255,105,180,.45);
-
 }
 
 /* ANIMACIÓN */
-
 @keyframes mostrarRecuerdo{
-
     from{
-
         opacity:0;
-
         transform:translateY(30px) scale(.95);
-
     }
-
     to{
-
         opacity:1;
-
         transform:translateY(0) scale(1);
-
     }
-
 }
 
 /* EFECTO POLAROID */
-
 #memoryImage:hover{
-
     transform:scale(1.02) rotate(-1deg);
-
 }
 
 /* =======================================
 CARTA FINAL
 ======================================= */
-
 #finalSection{
-
     display:none;
-
 }
 
 #finalSection .letter{
-
     max-width:430px;
-
     animation:subirFinal 1.2s ease;
-
 }
 
 #finalSection h1{
-
     font-family:'Great Vibes',cursive;
-
     font-size:3rem;
-
     color:#d85c8b;
-
     margin-bottom:25px;
-
 }
 
 #finalText{
-
     color:#555;
-
     font-size:1rem;
-
     line-height:2;
-
     white-space:pre-wrap;
-
     min-height:260px;
-
 }
 
-/* =======================================
-BOTÓN FINAL
-======================================= */
-
+/* BOTÓN FINAL */
 #finishButton{
-
     margin-top:35px;
-
     width:100%;
-
     padding:16px;
-
     border:none;
-
     border-radius:50px;
-
     background:linear-gradient(135deg,#ff6fa5,#ff4f88);
-
     color:white;
-
     font-size:17px;
-
     font-weight:600;
-
     cursor:pointer;
-
     transition:.35s;
-
     box-shadow:0 12px 30px rgba(255,105,180,.35);
-
 }
 
 #finishButton:hover{
-
     transform:translateY(-3px) scale(1.03);
-
     box-shadow:0 18px 40px rgba(255,105,180,.45);
-
 }
 
 /* =======================================
-TRANSICIONES
+TRANSICIONES GENERALES
 ======================================= */
-
 .ocultar{
-
     animation:desaparecer .8s forwards;
-
 }
 
 .mostrar{
-
     animation:aparecerPantalla .8s forwards;
-
 }
 
 @keyframes desaparecer{
-
     from{
-
         opacity:1;
-
         transform:scale(1);
-
     }
-
     to{
-
         opacity:0;
-
         transform:scale(.95);
-
     }
-
 }
 
 @keyframes aparecerPantalla{
-
     from{
-
         opacity:0;
-
         transform:translateY(20px);
-
     }
-
     to{
-
         opacity:1;
-
         transform:translateY(0);
-
     }
-
 }
 
 @keyframes subirFinal{
-
     from{
-
         opacity:0;
-
         transform:translateY(40px);
-
     }
-
     to{
-
         opacity:1;
-
         transform:translateY(0);
-
     }
-
 }
 
 /* =======================================
-EFECTOS DE LAS FOTOS
+EFECTOS EXTRAS
 ======================================= */
-
 .memoryCard{
-
     transition:.5s;
-
 }
 
 .memoryCard:hover{
-
     transform:translateY(-8px);
-
 }
 
 #memoryImage{
-
     transition:.5s;
-
 }
 
 #memoryImage:hover{
-
     transform:scale(1.03);
-
 }
 
 /* =======================================
 CORAZONES FLOTANDO
 ======================================= */
-
 .heart{
-
     position:fixed;
-
     bottom:-50px;
-
     color:#ff7aa8;
-
     font-size:22px;
-
     animation:floatHeart linear forwards;
-
     pointer-events:none;
-
     z-index:-1;
-
 }
 
 @keyframes floatHeart{
-
     0%{
-
-        transform:
-        translateY(0)
-        scale(.6);
-
+        transform:translateY(0) scale(.6);
         opacity:0;
-
     }
-
     20%{
-
         opacity:.8;
-
     }
-
     100%{
-
-        transform:
-        translateY(-120vh)
-        rotate(360deg)
-        scale(1.4);
-
+        transform:translateY(-120vh) rotate(360deg) scale(1.4);
         opacity:0;
-
     }
-
 }
 
 /* =======================================
 BRILLO SUAVE
 ======================================= */
-
 .memoryCard::after{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
     border-radius:28px;
-
     background:linear-gradient(
         130deg,
         transparent 0%,
         rgba(255,255,255,.25) 50%,
         transparent 100%
     );
-
     pointer-events:none;
-
 }
 
 /* =======================================
 RESPONSIVE
 ======================================= */
-
 @media(max-width:480px){
-
     .letter,
     .memoryCard{
-
         width:95%;
-
         padding:20px;
-
     }
-
     .letter h1{
-
         font-size:2.5rem;
-
     }
-
     #memoryTitle{
-
         font-size:2rem;
-
     }
-
     #typewriter,
     #memoryText,
     #finalText{
-
         font-size:.95rem;
-
         line-height:1.8;
-
     }
-
     #startButton,
     #nextMemory,
     #finishButton{
-
         font-size:16px;
-
         padding:15px;
-
     }
-
 }
 
 /* =======================================
-PÉTALOS
+PÉTALOS SEGUNDO CONTENEDOR
 ======================================= */
-
 .petal{
-
     position:fixed;
-
     top:-50px;
-
     width:18px;
-
     height:18px;
-
     background:#ffc6da;
-
     border-radius:60% 40% 60% 40%;
-
     pointer-events:none;
-
     opacity:.8;
-
     animation:caer linear forwards;
-
     z-index:-2;
-
 }
 
 @keyframes caer{
-
     from{
-
-        transform:
-        translateY(-50px)
-        translateX(0)
-        rotate(0deg);
-
+        transform: translateY(-50px) translateX(0) rotate(0deg);
     }
-
     to{
-
-        transform:
-        translateY(120vh)
-        translateX(120px)
-        rotate(720deg);
-
+        transform: translateY(120vh) translateX(120px) rotate(720deg);
     }
-
 }
 
-/* =======================================
-PARTÍCULAS
-======================================= */
-
-.sparkle{
-
-    position:fixed;
-
-    width:5px;
-
-    height:5px;
-
-    border-radius:50%;
-
-    background:white;
-
-    opacity:.6;
-
-    animation:brillo 3s infinite;
-
-    pointer-events:none;
-
+/*=========================================
+CORAZÓN DE LA PORTADA Y SU EFECTO SOBRE
+=========================================*/
+#heartContainer{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+    transition: all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-@keyframes brillo{
-
-    0%,100%{
-
-        opacity:.2;
-
-        transform:scale(.5);
-
-    }
-
-    50%{
-
-        opacity:1;
-
-        transform:scale(1.4);
-
-    }
-
+/* Cuando la carta sube, el corazón se vuelve secundario en el fondo */
+#heartContainer.fade {
+    opacity: 0.15;
+    transform: scale(0.65) translateY(90px);
+    pointer-events: none; /* Evita que bloquee clics en la carta */
 }
 
-/* =======================================
-EFECTO FINAL
-======================================= */
-
-.finishAnimation{
-
-    animation:finalMagic 2s ease;
-
+#heart{
+    position:relative;
+    width:240px;
+    height:220px;
+    animation:heartbeat 1.6s infinite;
 }
 
-@keyframes finalMagic{
+/* Detiene la animación de latido cuando se abre */
+#heart.open {
+    animation: none;
+}
 
+.left,
+.right{
+    position:absolute;
+    width:120px;
+    height:180px;
+    background:#ff5c8a;
+    border-radius:120px 120px 0 0;
+    transition:1.4s cubic-bezier(.25,.8,.25,1);
+    box-shadow:0 10px 25px rgba(255,92,138,.35);
+}
+
+.left{
+    left:0;
+    bottom:0;
+    transform-origin:100% 100%;
+    transform:rotate(-45deg);
+}
+
+.right{
+    right:0;
+    bottom:0;
+    transform-origin:0% 100%;
+    transform:rotate(45deg);
+}
+
+/* Clases de apertura interactiva */
+.left.open{
+    transform:rotate(-130deg);
+}
+
+.right.open{
+    transform:rotate(130deg);
+}
+
+@keyframes heartbeat{
     0%{
-
-        transform:scale(.9);
-
-        opacity:0;
-
-    }
-
-    100%{
-
         transform:scale(1);
-
-        opacity:1;
-
     }
-
+    50%{
+        transform:scale(1.08);
+    }
+    100%{
+        transform:scale(1);
+    }
 }
 
 /* =======================================
 SCROLL
 ======================================= */
-
 ::-webkit-scrollbar{
-
     width:8px;
-
 }
-
 ::-webkit-scrollbar-thumb{
-
     background:#f59fbe;
-
     border-radius:20px;
-
 }
-
 ::-webkit-scrollbar-track{
-
     background:transparent;
-
 }
-
-/* =======================================
-SELECCIÓN
-======================================= */
 
 ::selection{
-
     background:#ffb5cf;
-
     color:white;
-
 }
-
-/* =======================================
-ANIMACIÓN SUAVE DE BOTONES
-======================================= */
 
 button{
-
     transition:.3s;
-
 }
-
 button:active{
-
     transform:scale(.96);
-
 }
-
-/* =======================================
-IMÁGENES
-======================================= */
 
 img{
-
     user-select:none;
-
     -webkit-user-drag:none;
-
 }
-
-/* =======================================
-MÓVILES
-======================================= */
 
 @media(max-height:700px){
-
     .letter{
-
         padding:22px;
-
     }
-
     .letter h1{
-
         font-size:2.4rem;
-
     }
-
     #typewriter{
-
         min-height:220px;
-
         line-height:1.8;
-
     }
-
-}
-
-/*=========================================
-CORAZÓN
-=========================================*/
-
-#heartContainer{
-
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    z-index:100;
-
-}
-
-#heart{
-
-    position:relative;
-
-    width:240px;
-    height:220px;
-
-    animation:heartbeat 1.6s infinite;
-
-}
-
-.left,
-.right{
-
-    position:absolute;
-
-    width:120px;
-    height:180px;
-
-    background:#ff5c8a;
-
-    border-radius:120px 120px 0 0;
-
-    transition:1.4s cubic-bezier(.25,.8,.25,1);
-
-    box-shadow:0 10px 25px rgba(255,92,138,.35);
-
-}
-
-.left{
-
-    left:0;
-
-    bottom:0;
-
-    transform-origin:100% 100%;
-
-    transform:rotate(-45deg);
-
-}
-
-.right{
-
-    right:0;
-
-    bottom:0;
-
-    transform-origin:0% 100%;
-
-    transform:rotate(45deg);
-
-}
-
-.left.open{
-
-    transform:rotate(-125deg);
-
-}
-
-.right.open{
-
-    transform:rotate(125deg);
-
-}
-
-@keyframes heartbeat{
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-    50%{
-
-        transform:scale(1.08);
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-    }
-
 }
