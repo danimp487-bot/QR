@@ -3,51 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Alguien Especial</title>
-    <!-- Fuentes elegantes de Google Fonts -->
+    <title>Feliz Cumpleaños, Mi Amor ❤️</title>
+    <!-- Fuentes elegantes y románticas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <!-- Vinculación del estilo CSS principal -->
+    <!-- Vinculación de estilos -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Fondo interactivo de partículas flotantes (corazones y destellos) -->
+    <!-- Fondo interactivo de corazones y partículas flotantes -->
     <canvas id="canvas-particulas"></canvas>
 
-    <!-- Elemento de audio global (reproducción continua) -->
-    <!-- Nota: Reemplaza "musica.mp3" con la ruta de tu archivo de sonido más adelante -->
+    <!-- Reproductor de audio global (reproduce continuamente en segundo plano) -->
     <audio id="musica-fondo" src="musica.mp3" loop></audio>
 
-    <!-- Contenedor principal de la experiencia -->
     <main id="contenedor-experiencia">
 
-        <!-- PANTALLA 1: Bienvenida con efecto máquina de escribir -->
-        <section id="pantalla-1" class="pantalla activa">
-            <div class="contenido-pantalla">
-                <!-- Contenedor donde se escribirá el texto dinámicamente -->
-                <h1 id="texto-maquina" class="texto-romantico"></h1>
-                
-                <!-- Botón de transición (oculto inicialmente) -->
-                <button id="btn-entrar" class="boton-elegante oculto">
-                    Comenzar la experiencia
+        <!-- PANTALLA DE PORTADA (Asegura la música y la interacción inicial) -->
+        <section id="pantalla-portada" class="pantalla activa">
+            <div class="carta-portada">
+                <div class="icono-regalo">🎁</div>
+                <h2 class="titulo-portada">Para la persona que ilumina mi vida...</h2>
+                <p class="subtitulo-portada">He preparado algo muy especial para ti.</p>
+                <button id="btn-abrir-regalo" class="boton-elegante pulsar-suave">
+                    Abrir tu regalo ❤️
                 </button>
             </div>
         </section>
 
-        <!-- PANTALLA 2: Placeholder preparado para el siguiente paso -->
+        <!-- PANTALLA 1: Introducción con texto de máquina de escribir -->
+        <section id="pantalla-1" class="pantalla">
+            <div class="tarjeta-carta">
+                <!-- Contenedor donde se escribirá la carta -->
+                <div class="scroll-carta">
+                    <p id="texto-maquina" class="texto-carta"></p>
+                </div>
+                
+                <!-- Botón de continuación, inicialmente oculto -->
+                <div class="contenedor-boton-carta">
+                    <button id="btn-comenzar" class="boton-elegante oculto">
+                        Comenzar nuestro viaje ❤️
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2: Preparada y lista para recibir contenido futuro -->
         <section id="pantalla-2" class="pantalla">
-            <div class="contenido-pantalla">
-                <!-- Este contenido se puede expandir posteriormente en el script.js -->
-                <h2 class="subtitulo-romantico">Un rincón especial para ti</h2>
-                <p class="texto-suave">Esta pantalla está lista para recibir tu contenido personalizado, sorpresas o cartas de amor.</p>
+            <div class="tarjeta-carta">
+                <h2 class="subtitulo-romantico">Nuestro Viaje Juntos</h2>
+                <p class="texto-suave">Esta pantalla está lista para ser programada con tus fotos, mapas, fechas o cartas adicionales.</p>
             </div>
         </section>
 
     </main>
 
-    <!-- Vinculación de la lógica de JavaScript -->
+    <!-- Script de control -->
     <script src="script.js"></script>
 </body>
 </html>
