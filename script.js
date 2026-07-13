@@ -26,21 +26,21 @@ Feliz 21 cumpleaños, mi amor. Hoy celebramos tu vida, tu sonrisa y el maravillo
 
 Para siempre nosotros, te amo con locura. 💖`;
 
-// Array con los 13 recuerdos (Personaliza los textos a tu gusto)
+// Array con los 13 recuerdos (Simplificado sin títulos de capítulo)
 const recuerdos = [
-    { img: "img/foto1.jpg", title: "Capítulo 1", text: "El día en que todo comenzó y mi vida cambió para siempre. ❤️" },
-    { img: "img/foto2.jpg", title: "Capítulo 2", text: "Nuestra primera cita llena de risas nerviosas y miradas mágicas." },
-    { img: "img/foto3.jpg", title: "Capítulo 3", text: "Ese primer viaje juntos donde supimos que éramos el uno para el otro." },
-    { img: "img/foto4.jpg", title: "Capítulo 4", text: "Las tardes lluviosas acurrucados compartiendo una película y un café." },
-    { img: "img/foto5.jpg", title: "Capítulo 5", text: "Tu risa escandalosa que alegra instantáneamente hasta mi peor día." },
-    { img: "img/foto6.jpg", title: "Capítulo 6", text: "Esa cena improvisada en la cocina donde terminamos bailando." },
-    { img: "img/foto7.jpg", title: "Capítulo 7", text: "Apoyándonos y creciendo de la mano en cada paso importante." },
-    { img: "img/foto8.jpg", title: "Capítulo 8", text: "Las locuras cotidianas y bromas que solo nosotros entendemos." },
-    { img: "img/foto9.jpg", title: "Capítulo 9", text: "Caminatas eternas cogidos de la mano sin importar el destino." },
+    { img: "img/foto1.jpg", text: "El día en que todo comenzó y mi vida cambió para siempre. ❤️" },
+    { img: "img/foto2.jpg", text: "Nuestra primera cita llena de risas nerviosas y miradas mágicas." },
+    { img: "img/foto3.jpg", text: "Ese primer viaje juntos donde supimos que éramos el uno para el otro." },
+    { img: "img/foto4.jpg", text: "Las tardes lluviosas acurrucados compartiendo una película y un café." },
+    { img: "img/foto5.jpg", text: "Tu risa escandalosa que alegra instantáneamente hasta mi peor día." },
+    { img: "img/foto6.jpg", text: "Esa cena improvisada en la cocina donde terminamos bailando." },
+    { img: "img/foto7.jpg", text: "Apoyándonos y creciendo de la mano en cada paso importante." },
+    { img: "img/foto8.jpg", text: "Las locuras cotidianas y bromas que solo nosotros entendemos." },
+    { img: "img/foto9.jpg", text: "Caminatas eternas cogidos de la mano sin importar el destino." },
     { img: "img/foto10.jpg", text: "Celebrando tus éxitos como si fuesen míos, porque tu felicidad es mi prioridad." },
-    { img: "img/foto11.jpg", title: "Capítulo 11", text: "Los abrazos eternos que tienen el superpoder de curarlo absolutamente todo." },
-    { img: "img/foto12.jpg", title: "Capítulo 12", text: "Cada pequeño detalle diario que hace de lo ordinario algo extraordinario." },
-    { img: "img/foto13.jpg", title: "Capítulo 13", text: "Y aquí estamos hoy, listos para seguir escribiendo nuestra historia eternamente." }
+    { img: "img/foto11.jpg", text: "Los abrazos eternos que tienen el superpoder de curarlo absolutamente todo." },
+    { img: "img/foto12.jpg", text: "Cada pequeño detalle diario que hace de lo ordinario algo extraordinario." },
+    { img: "img/foto13.jpg", text: "Y aquí estamos hoy, listos para seguir escribiendo nuestra historia eternamente." }
 ];
 
 // ==========================================
@@ -58,7 +58,6 @@ const toPart2Btn = document.getElementById("toPart2Btn");
 const part2 = document.getElementById("part2");
 const memoryCounter = document.getElementById("memory-counter");
 const memoryImg = document.getElementById("memory-img");
-const memoryTitle = document.getElementById("memory-title");
 const memoryText = document.getElementById("memory-text");
 const progressBar = document.getElementById("progress-bar");
 const prevBtn = document.getElementById("prevBtn");
@@ -80,7 +79,7 @@ function playMusic() {
         isMusicPlaying = true;
         musicToggle.classList.add("music-playing");
     }).catch(err => {
-        console.log("Auto-play prevenido por el navegador. Esperando interacción.");
+        console.log("Espera de interacción del usuario para reproducir música.");
     });
 }
 
@@ -98,24 +97,23 @@ function toggleMusic() {
 
 musicToggle.addEventListener("click", toggleMusic);
 
-// Iniciar música en cuanto hagan clic en cualquier parte de la web
 document.addEventListener("click", () => {
     if (!isMusicPlaying) playMusic();
 }, { once: true });
 
 // ==========================================
-// MÁQUINA DE ESCRIBIR GENERICA
+// MÁQUINA DE ESCRIBIR CON AUTO-SCROLL SUAVE
 // ==========================================
 function typeEffect(element, text, speed, callback) {
     let index = 0;
     element.innerHTML = "";
+    const container = element.parentElement;
     
     function type() {
         if (index < text.length) {
             element.innerHTML += text.charAt(index);
             index++;
-            // Auto-scroll si el texto supera la altura del contenedor
-            const container = element.parentElement;
+            // Auto-scroll durante la escritura para que siga el cursor
             container.scrollTop = container.scrollHeight;
             setTimeout(type, speed);
         } else if (callback) {
@@ -126,7 +124,7 @@ function typeEffect(element, text, speed, callback) {
 }
 
 // ==========================================
-// TRANSICIÓN ENTRE SECCIONES SUAVE
+// TRANSICIÓN ENTRE SECCIONES
 // ==========================================
 function switchSection(fromSection, toSection, callback) {
     fromSection.style.opacity = "0";
@@ -148,10 +146,9 @@ window.onload = () => {
     createPetals();
     // Empezar a escribir tras una pequeña pausa inicial de 1 segundo
     setTimeout(() => {
-        typeEffect(typewriter1, textoIntro, 35, () => {
-            // Elimina el cursor parpadeante de la intro al terminar
-            typewriter1.nextElementSibling.style.display = "none";
-            // Muestra botón "Comenzar"
+        // Velocidad cambiada a 55ms (más lento y tierno)
+        typeEffect(typewriter1, textoIntro, 55, () => {
+            typewriter1.nextElementSibling.style.display = "none"; // Ocultar cursor
             toPart2Btn.classList.add("visible-element");
         });
     }, 1000);
@@ -163,7 +160,7 @@ window.onload = () => {
 let currentMemoryIndex = 0;
 let slideshowTimer = null;
 let progressTimer = null;
-const SLIDE_DURATION = 10000; // 10 segundos por recuerdo
+const SLIDE_DURATION = 10000; // 10 segundos
 
 function startSlideshow() {
     loadMemory(0);
@@ -176,21 +173,21 @@ function loadMemory(index) {
     // Cambiar la interfaz de la Polaroid
     memoryCounter.textContent = `${index + 1} / ${recuerdos.length}`;
     
-    // Suave fade de la imagen
+    // Suave desvanecimiento de la imagen al cambiar
     memoryImg.style.opacity = "0.2";
     setTimeout(() => {
         memoryImg.src = memory.img;
         memoryImg.style.opacity = "1";
     }, 200);
 
-    memoryTitle.textContent = memory.title;
+    // Solo cargamos el texto descriptivo
     memoryText.textContent = memory.text;
 
     // Configurar visibilidad de botones manuales
     prevBtn.style.opacity = index === 0 ? "0.3" : "1";
     prevBtn.style.pointerEvents = index === 0 ? "none" : "auto";
     
-    // Si estamos en la última foto (la 13), ocultar "Siguiente" y mostrar botón final
+    // Si llegamos al recuerdo 13, cambiamos controles por el botón de pase a la parte 3
     if (index === recuerdos.length - 1) {
         nextBtn.style.display = "none";
         toPart3Btn.classList.add("visible-element");
@@ -247,7 +244,7 @@ prevBtn.addEventListener("click", () => {
 
 // Ir de la Parte 1 a la Parte 2
 toPart2Btn.addEventListener("click", () => {
-    playMusic(); // Asegura el inicio de música si no se activó antes
+    playMusic();
     switchSection(part1, part2, () => {
         startSlideshow();
     });
@@ -255,15 +252,13 @@ toPart2Btn.addEventListener("click", () => {
 
 // Ir de la Parte 2 a la Parte 3
 toPart3Btn.addEventListener("click", () => {
-    // Paramos los contadores de la galería
     clearTimeout(slideshowTimer);
     cancelAnimationFrame(progressTimer);
 
     switchSection(part2, part3, () => {
-        typeEffect(typewriter2, textoFinal, 35, () => {
-            // Elimina cursor de la carta final al terminar de escribir
-            typewriter2.nextElementSibling.style.display = "none";
-            // Muestra botón de sorpresa final
+        // Velocidad cambiada a 55ms (más lento y tierno)
+        typeEffect(typewriter2, textoFinal, 55, () => {
+            typewriter2.nextElementSibling.style.display = "none"; // Ocultar cursor
             finalSurpriseBtn.classList.add("visible-element");
         });
     });
@@ -285,7 +280,6 @@ function createPetals() {
     const container = document.getElementById("petals-container");
     const elements = ["🌸", "✨", "💕", "🌹", "💮"];
     
-    // Generar un nuevo pétalo cada 400ms
     setInterval(() => {
         const petal = document.createElement("div");
         petal.classList.add("petal");
@@ -293,19 +287,17 @@ function createPetals() {
         
         petal.style.left = Math.random() * 100 + "vw";
         petal.style.fontSize = Math.random() * 15 + 15 + "px";
-        petal.style.animationDuration = Math.random() * 5 + 6 + "s"; // Entre 6 y 11 segundos cayendo
+        petal.style.animationDuration = Math.random() * 5 + 6 + "s";
         petal.style.opacity = Math.random() * 0.5 + 0.5;
         
         container.appendChild(petal);
         
-        // Limpieza de memoria
         setTimeout(() => {
             petal.remove();
         }, 11000);
     }, 400);
 }
 
-// Función exclusiva para la lluvia de corazones finales
 function createExplodingHeart() {
     const heart = document.createElement("div");
     heart.classList.add("falling-heart");
@@ -314,7 +306,7 @@ function createExplodingHeart() {
     heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
     
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 2 + 2.5 + "s"; // Vuelo rápido hacia arriba (2.5s a 4.5s)
+    heart.style.animationDuration = Math.random() * 2 + 2.5 + "s";
     
     document.body.appendChild(heart);
     
