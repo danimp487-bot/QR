@@ -3,180 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz 21 Cumpleaños ❤️</title>
-    <!-- Importación de tipografías elegantes desde Google Fonts -->
+    <title>Para Alguien Especial</title>
+    <!-- Fuentes elegantes de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Vinculación del estilo CSS principal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Música de fondo (Reemplazar 'musica.mp3' por tu archivo) -->
-    <audio id="bg-music" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
+    <!-- Fondo interactivo de partículas flotantes (corazones y destellos) -->
+    <canvas id="canvas-particulas"></canvas>
 
-    <!-- Control flotante de música -->
-    <button id="music-toggle" class="music-btn" aria-label="Controlar música">
-        <span class="music-icon">🎵</span>
-    </button>
+    <!-- Elemento de audio global (reproducción continua) -->
+    <!-- Nota: Reemplaza "musica.mp3" con la ruta de tu archivo de sonido más adelante -->
+    <audio id="musica-fondo" src="musica.mp3" loop></audio>
 
-    <!-- Contenedor de corazones flotantes de fondo -->
-    <div id="ambient-hearts" class="ambient-hearts-container"></div>
+    <!-- Contenedor principal de la experiencia -->
+    <main id="contenedor-experiencia">
 
-    <!-- PANTALLA INICIAL -->
-    <section id="hero" class="fullscreen-section">
-        <!-- Puedes cambiar 'hero-bg.jpg' por la imagen de fondo que prefieras -->
-        <div class="hero-overlay" style="background-image: url('hero-bg.jpg');"></div>
-        <div class="hero-content">
-            <h1 class="fade-in">Feliz 21 cumpleaños ❤️</h1>
-            <p class="fade-in delay-1">“Cualquier día contigo es el mejor día de mi vida.”</p>
-            <button id="btn-start" class="btn premium-btn fade-in delay-2">❤️ Comenzar ❤️</button>
-        </div>
-    </section>
-
-    <!-- HISTORIA INTERACTIVA (SLIDESHOW) -->
-    <section id="story" class="fullscreen-section hidden">
-        <div class="story-wrapper">
-            
-            <!-- DIAPOSITIVA 1 -->
-            <div class="slide active">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto1.jpg' por tu primera foto -->
-                    <img src="IMG_4665.jpeg" alt="IMG_4665.jpeg" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <p class="slide-text">“Nuestro concierto de Saiko. ❤️ Recuerdo estar abrazado a ti mientras cantábamos juntos. Ojalá pudiera volver a vivir ese momento una y otra vez.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
+        <!-- PANTALLA 1: Bienvenida con efecto máquina de escribir -->
+        <section id="pantalla-1" class="pantalla activa">
+            <div class="contenido-pantalla">
+                <!-- Contenedor donde se escribirá el texto dinámicamente -->
+                <h1 id="texto-maquina" class="texto-romantico"></h1>
+                
+                <!-- Botón de transición (oculto inicialmente) -->
+                <button id="btn-entrar" class="boton-elegante oculto">
+                    Comenzar la experiencia
+                </button>
             </div>
+        </section>
 
-            <!-- DIAPOSITIVA 2 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto2.jpg' por tu segunda foto -->
-                    <img src="foto2.jpg" alt="Foto 2" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA SEGUNDA FOTO -->
-                    <p class="slide-text">“Aquí puedes escribir la dedicatoria para la segunda foto. Describe lo especial de ese momento juntos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
+        <!-- PANTALLA 2: Placeholder preparado para el siguiente paso -->
+        <section id="pantalla-2" class="pantalla">
+            <div class="contenido-pantalla">
+                <!-- Este contenido se puede expandir posteriormente en el script.js -->
+                <h2 class="subtitulo-romantico">Un rincón especial para ti</h2>
+                <p class="texto-suave">Esta pantalla está lista para recibir tu contenido personalizado, sorpresas o cartas de amor.</p>
             </div>
+        </section>
 
-            <!-- DIAPOSITIVA 3 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto3.jpg' por tu tercera foto -->
-                    <img src="foto3.jpg" alt="Foto 3" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA TERCERA FOTO -->
-                    <p class="slide-text">“Añade aquí otra memoria, broma o detalle bonito sobre esta fotografía. Es muy sencillo duplicar este bloque si necesitas más fotos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
-            </div>
-        
-          <!-- DIAPOSITIVA 4 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto2.jpg' por tu segunda foto -->
-                    <img src="foto4.jpg" alt="Foto 4" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA SEGUNDA FOTO -->
-                    <p class="slide-text">“Aquí puedes escribir la dedicatoria para la segunda foto. Describe lo especial de ese momento juntos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
-            </div>
+    </main>
 
-              <!-- DIAPOSITIVA 5 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto2.jpg' por tu segunda foto -->
-                    <img src="foto5.jpg" alt="Foto 5" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA SEGUNDA FOTO -->
-                    <p class="slide-text">“Aquí puedes escribir la dedicatoria para la segunda foto. Describe lo especial de ese momento juntos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
-            </div>
-
-              <!-- DIAPOSITIVA 6 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto2.jpg' por tu segunda foto -->
-                    <img src="foto6.jpg" alt="Foto 6" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA SEGUNDA FOTO -->
-                    <p class="slide-text">“Aquí puedes escribir la dedicatoria para la segunda foto. Describe lo especial de ese momento juntos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
-            </div>
-
-              <!-- DIAPOSITIVA 7 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto2.jpg' por tu segunda foto -->
-                    <img src="foto7.jpg" alt="Foto 7" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA SEGUNDA FOTO -->
-                    <p class="slide-text">“Aquí puedes escribir la dedicatoria para la segunda foto. Describe lo especial de ese momento juntos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
-            </div>
-
-              <!-- DIAPOSITIVA 8 (Ejemplo para duplicar) -->
-            <div class="slide">
-                <div class="image-wrapper">
-                    <!-- Sustituye 'foto2.jpg' por tu segunda foto -->
-                    <img src="foto8.jpg" alt="Foto 8" class="story-image">
-                    <div class="zoom-hint">Toca la foto para ampliar</div>
-                </div>
-                <div class="slide-content">
-                    <!-- AQUÍ PUEDES ESCRIBIR EL TEXTO PARA LA SEGUNDA FOTO -->
-                    <p class="slide-text">“Aquí puedes escribir la dedicatoria para la segunda foto. Describe lo especial de ese momento juntos.”</p>
-                    <button class="btn btn-next">Siguiente →</button>
-                </div>
-            </div>
-    </section>
-
-    <!-- CARTA FINAL -->
-    <section id="letter-section" class="fullscreen-section hidden">
-        <div class="letter-box">
-            <div id="typewriter-text" class="letter-content"></div>
-            <!-- Botón final que se mostrará solo al terminar de escribirse la carta -->
-            <button id="btn-final" class="btn premium-btn hidden">❤️ Siempre nosotros ❤️</button>
-        </div>
-    </section>
-
-    <!-- PANTALLA FINAL (Animación y Mensaje de Cierre) -->
-    <section id="ending-section" class="fullscreen-section hidden">
-        <!-- Canvas para renderizar la lluvia de cientos de corazones -->
-        <canvas id="hearts-canvas"></canvas>
-        <div class="ending-content">
-            <h2 class="gold-text">Gracias por existir.</h2>
-        </div>
-    </section>
-
-    <!-- LIGHTBOX (Visualizador de imágenes a pantalla completa) -->
-    <div id="lightbox" class="lightbox hidden">
-        <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" class="lightbox-content" src="" alt="Imagen ampliada">
-    </div>
-
+    <!-- Vinculación de la lógica de JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
