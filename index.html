@@ -3,64 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños, Mi Amor ❤️</title>
-    <!-- Fuentes elegantes y románticas -->
+    <title>Feliz 21 Cumpleaños ❤️</title>
+
+    <!-- Fuente elegante -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <!-- Vinculación de estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Fondo interactivo de corazones y partículas flotantes -->
-    <canvas id="canvas-particulas"></canvas>
+    <!-- ========================= -->
+    <!-- Música de fondo -->
+    <!-- Sustituye "musica.mp3" por tu canción -->
+    <!-- ========================= -->
+    <audio id="bgMusic" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Reproductor de audio global (reproduce continuamente en segundo plano) -->
-    <audio id="musica-fondo" src="musica.mp3" loop></audio>
+    <!-- Fondo -->
+    <div class="background"></div>
 
-    <main id="contenedor-experiencia">
+    <!-- Corazones flotantes -->
+    <div class="hearts">
+        <span>❤️</span>
+        <span>🤍</span>
+        <span>❤️</span>
+        <span>🤍</span>
+        <span>❤️</span>
+        <span>🤍</span>
+        <span>❤️</span>
+        <span>🤍</span>
+    </div>
 
-        <!-- PANTALLA DE PORTADA (Asegura la música y la interacción inicial) -->
-        <section id="pantalla-portada" class="pantalla activa">
-            <div class="carta-portada">
-                <div class="icono-regalo">🎁</div>
-                <h2 class="titulo-portada">Para la persona que ilumina mi vida...</h2>
-                <p class="subtitulo-portada">He preparado algo muy especial para ti.</p>
-                <button id="btn-abrir-regalo" class="boton-elegante pulsar-suave">
-                    Abrir tu regalo ❤️
-                </button>
-            </div>
-        </section>
+    <!-- Contenido principal -->
+    <main class="container">
 
-        <!-- PANTALLA 1: Introducción con texto de máquina de escribir -->
-        <section id="pantalla-1" class="pantalla">
-            <div class="tarjeta-carta">
-                <!-- Contenedor donde se escribirá la carta -->
-                <div class="scroll-carta">
-                    <p id="texto-maquina" class="texto-carta"></p>
-                </div>
-                
-                <!-- Botón de continuación, inicialmente oculto -->
-                <div class="contenedor-boton-carta">
-                    <button id="btn-comenzar" class="boton-elegante oculto">
-                        Comenzar nuestro viaje ❤️
-                    </button>
-                </div>
-            </div>
-        </section>
+        <div class="glass-card">
 
-        <!-- PANTALLA 2: Preparada y lista para recibir contenido futuro -->
-        <section id="pantalla-2" class="pantalla">
-            <div class="tarjeta-carta">
-                <h2 class="subtitulo-romantico">Nuestro Viaje Juntos</h2>
-                <p class="texto-suave">Esta pantalla está lista para ser programada con tus fotos, mapas, fechas o cartas adicionales.</p>
-            </div>
-        </section>
+            <h1>Para la persona más especial de mi vida ❤️</h1>
+
+            <!-- Aquí se escribirá el texto -->
+            <p id="typewriter"></p>
+
+            <!-- Cursor -->
+            <span id="cursor">|</span>
+
+            <!-- Botón -->
+            <button id="nextButton">
+                Comenzar nuestro viaje ❤️
+            </button>
+
+        </div>
 
     </main>
 
-    <!-- Script de control -->
+    <!-- Texto que se escribirá -->
+    <script>
+
+        const texto = `Feliz 21 cumpleaños, mi amor. ❤️
+
+Este año quería regalarte algo un poco diferente. No quería que este día se quedara solo en un regalo material, porque siento que lo más valioso que tenemos es todo lo que hemos vivido juntos.
+
+Por eso he querido preparar este pequeño viaje por nuestra historia. Un recorrido por las etapas, los momentos, las risas, las aventuras y todos esos recuerdos que llevo guardados con tanto cariño. Quiero que, mientras avances, puedas volver a sentir todo lo bonito que hemos construido juntos.
+
+Espero de corazón que te guste y que lo disfrutes tanto como yo he disfrutado preparándolo para ti.
+
+Gracias por hacer mi vida mucho más feliz y por ser la persona con la que quiero seguir creando miles de recuerdos más.
+
+Te amo con todo mi corazón.
+
+Feliz cumpleaños, mi vida. ❤️`;
+
+    </script>
+
     <script src="script.js"></script>
+
 </body>
 </html>
