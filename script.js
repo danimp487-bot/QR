@@ -147,7 +147,7 @@ window.onload = () => {
     // Empezar a escribir tras una pequeña pausa inicial de 1 segundo
     setTimeout(() => {
         // Velocidad cambiada a 55ms (más lento y tierno)
-        typeEffect(typewriter1, textoIntro, 30, () => {
+        typeEffect(typewriter1, textoIntro, 20, () => {
             typewriter1.nextElementSibling.style.display = "none"; // Ocultar cursor
             toPart2Btn.classList.add("visible-element");
         });
@@ -257,7 +257,7 @@ toPart3Btn.addEventListener("click", () => {
 
     switchSection(part2, part3, () => {
         // Velocidad cambiada a 55ms (más lento y tierno)
-        typeEffect(typewriter2, textoFinal, 30, () => {
+        typeEffect(typewriter2, textoFinal, 20, () => {
             typewriter2.nextElementSibling.style.display = "none"; // Ocultar cursor
             finalSurpriseBtn.classList.add("visible-element");
         });
