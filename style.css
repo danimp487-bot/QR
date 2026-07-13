@@ -1,6 +1,6 @@
-/*=========================
-FUENTES Y RESET
-=========================*/
+/* =======================================
+RESET
+======================================= */
 
 *{
     margin:0;
@@ -9,503 +9,92 @@ FUENTES Y RESET
 }
 
 html{
-    width:100%;
-    height:100%;
+
+    scroll-behavior:smooth;
+
 }
 
 body{
 
-    width:100%;
-    min-height:100vh;
+    font-family:'Poppins',sans-serif;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background:#fdeff4;
 
     overflow:hidden;
 
-    font-family:'Poppins',sans-serif;
+    width:100vw;
 
-    background:#ffe8f0;
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     position:relative;
 
 }
 
-/*=========================
+/* =======================================
 FONDO
-=========================*/
+======================================= */
 
 .background{
 
     position:fixed;
+
     inset:0;
 
     background:
-    radial-gradient(circle at top,#ffd4e4 0%,transparent 35%),
-    radial-gradient(circle at bottom,#ffe8d8 0%,transparent 40%),
-    linear-gradient(180deg,#fff7fb,#ffe5ef,#ffd8e7);
 
-    z-index:-10;
+    radial-gradient(circle at top,#ffd7e6 0%,transparent 40%),
 
-}
+    radial-gradient(circle at bottom,#ffe8d7 0%,transparent 45%),
 
-/*=========================
-PÉTALOS Y PARTÍCULAS
-=========================*/
-
-#petals,
-#particles{
-
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
+    linear-gradient(135deg,#fff7fb,#ffe8ef,#ffdce8);
 
     z-index:-5;
 
 }
 
-/*=========================
-SOBRE
-=========================*/
-
-#envelope{
-
-    position:relative;
-
-    width:min(92vw,420px);
-
-    height:700px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:flex-end;
-
-}
-
-/*=========================
-SOBRE
-=========================*/
-
-.back{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-
-    height:240px;
-
-    background:#f8bfd3;
-
-    border-radius:18px;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.18);
-
-}
-
-/* Solapa */
-
-.cover{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-
-    height:240px;
-
-    z-index:8;
-
-}
-
-.cover::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    top:0;
-
-    width:0;
-    height:0;
-
-    border-left:210px solid transparent;
-    border-right:210px solid transparent;
-    border-top:150px solid #f5aeca;
-
-    transform-origin:top;
-
-    transition:1.5s ease;
-
-}
-
-/* Laterales */
-
-.cover::after{
-
-    content:"";
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-    height:100%;
-
-    background:linear-gradient(135deg,#f8c7d8,#f2a7c3);
-
-    border-radius:18px;
-
-}
-
-/*=========================
-CARTA
-=========================*/
-
-#letter{
-
-    position:absolute;
-
-    bottom:30px;
-
-    width:90%;
-
-    height:82%;
-
-    background:rgba(255,255,255,.96);
-
-    border-radius:18px;
-
-    padding:30px;
-
-    overflow-y:auto;
-
-    box-shadow:
-    0 20px 45px rgba(0,0,0,.22);
-
-    transform:translateY(180px);
-
-    transition:2s ease;
-
-    z-index:4;
-
-}
-
-/* Abrir sobre */
-
-.open .cover::before{
-
-    transform:rotateX(180deg);
-
-}
-
-.open #letter{
-
-    transform:translateY(-60px);
-
-}
-
-/* Scroll */
-
-#letter::-webkit-scrollbar{
-
-    width:7px;
-
-}
-
-#letter::-webkit-scrollbar-thumb{
-
-    background:#e7a4bc;
-
-    border-radius:20px;
-
-}
-
-/*=========================
-TÍTULO
-=========================*/
-
-#letter h1{
-
-    font-family:'Great Vibes',cursive;
-
-    font-size:2.8rem;
-
-    color:#d85c8b;
-
-    text-align:center;
-
-    margin-bottom:30px;
-
-    font-weight:normal;
-
-    text-shadow:0 2px 10px rgba(216,92,139,.2);
-
-}
-
-/*=========================
-TEXTO
-=========================*/
-
-.texto{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-#typewriter{
-
-    width:100%;
-
-    color:#5c5c5c;
-
-    font-size:1.05rem;
-
-    line-height:2;
-
-    text-align:center;
-
-    white-space:pre-wrap;
-
-    word-break:break-word;
-
-    min-height:260px;
-
-}
-
-/*=========================
-CURSOR
-=========================*/
-
-#cursor{
-
-    color:#d85c8b;
-
-    font-size:28px;
-
-    margin-top:5px;
-
-    animation:cursor .8s infinite;
-
-}
-
-@keyframes cursor{
-
-    50%{
-
-        opacity:0;
-
-    }
-
-}
-
-/*=========================
-BOTÓN
-=========================*/
-
-#nextButton{
-
-    display:none;
-
-    margin:40px auto 15px;
-
-    padding:16px 35px;
-
-    border:none;
-
-    border-radius:50px;
-
-    background:linear-gradient(135deg,#ff8fb3,#ff6f9f);
-
-    color:white;
-
-    font-size:17px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.35s;
-
-    box-shadow:0 12px 25px rgba(255,111,159,.35);
-
-}
-
-#nextButton:hover{
-
-    transform:translateY(-3px) scale(1.05);
-
-    box-shadow:0 18px 35px rgba(255,111,159,.45);
-
-}
-
-#nextButton.show{
-
-    display:block;
-
-    animation:mostrarBoton .8s ease forwards;
-
-}
-
-@keyframes mostrarBoton{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/*=========================
-ANIMACIÓN GENERAL
-=========================*/
-
-@keyframes fade{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(25px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-#letter{
-
-    animation:fade 1.4s ease;
-
-}
-
-/*=========================
-BRILLO DE LA CARTA
-=========================*/
-
-#letter::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:18px;
-
-    background:linear-gradient(
-        130deg,
-        transparent 0%,
-        rgba(255,255,255,.55) 50%,
-        transparent 100%
-    );
-
-    opacity:.25;
-
-    pointer-events:none;
-
-}
-
-/*=========================
-BOTÓN
-=========================*/
-
-#nextButton{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-#nextButton::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-120%;
-
-    width:70%;
-
-    height:100%;
-
-    background:rgba(255,255,255,.45);
-
-    transform:skewX(-30deg);
-
-    transition:.8s;
-
-}
-
-#nextButton:hover::before{
-
-    left:150%;
-
-}
-
-#nextButton:hover{
-
-    transform:translateY(-3px);
-
-}
-
-/*=========================
+/* =======================================
 PÉTALOS
-=========================*/
+======================================= */
 
-.petal{
+#petals{
 
     position:fixed;
 
-    top:-40px;
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:-4;
+
+}
+
+.petal{
+
+    position:absolute;
 
     width:18px;
 
     height:18px;
 
-    background:#ffc8da;
+    background:#ffbfd5;
 
     border-radius:60% 40% 60% 40%;
 
     opacity:.75;
 
-    pointer-events:none;
+    animation-name:fall;
 
-    animation:fall linear forwards;
+    animation-timing-function:linear;
+
+    animation-fill-mode:forwards;
 
 }
 
@@ -530,35 +119,746 @@ PÉTALOS
 
 }
 
-/*=========================
+/* =======================================
+SECCIONES
+======================================= */
+
+section{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:25px;
+
+}
+
+/* Ocultas */
+
+#memorySection,
+#finalSection{
+
+    display:none;
+
+}
+
+/* =======================================
+CARTA INICIAL
+======================================= */
+
+.letter{
+
+    width:100%;
+    max-width:420px;
+
+    background:rgba(255,255,255,.94);
+
+    border-radius:28px;
+
+    padding:35px 28px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.15);
+
+    text-align:center;
+
+    backdrop-filter:blur(10px);
+
+    animation:subir 1.3s ease;
+
+}
+
+/* TÍTULO */
+
+.letter h1{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:3rem;
+
+    color:#d85c8b;
+
+    margin-bottom:25px;
+
+    font-weight:400;
+
+}
+
+/* TEXTO */
+
+#typewriter{
+
+    color:#555;
+
+    font-size:1rem;
+
+    line-height:2;
+
+    white-space:pre-wrap;
+
+    min-height:310px;
+
+}
+
+/* CURSOR */
+
+#cursor{
+
+    display:inline-block;
+
+    font-size:28px;
+
+    color:#d85c8b;
+
+    animation:cursor .8s infinite;
+
+}
+
+@keyframes cursor{
+
+    50%{
+
+        opacity:0;
+
+    }
+
+}
+
+/* BOTÓN */
+
+#startButton{
+
+    display:none;
+
+    margin-top:35px;
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ff8fb3,#ff5d95);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 12px 30px rgba(255,105,180,.35);
+
+}
+
+#startButton:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 40px rgba(255,105,180,.45);
+
+}
+
+#startButton.show{
+
+    display:block;
+
+    animation:aparecer .8s ease;
+
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ENTRADA */
+
+@keyframes subir{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =======================================
+RECUERDOS
+======================================= */
+
+.memoryCard{
+
+    width:100%;
+    max-width:420px;
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:28px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+    animation:mostrarRecuerdo .8s ease;
+
+}
+
+/* FOTO */
+
+#memoryImage{
+
+    width:100%;
+
+    aspect-ratio:4/5;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    border:8px solid white;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+    margin-bottom:22px;
+
+    transition:.5s;
+
+}
+
+/* TÍTULO */
+
+#memoryTitle{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:2.3rem;
+
+    color:#d85c8b;
+
+    margin-bottom:15px;
+
+}
+
+/* TEXTO */
+
+#memoryText{
+
+    color:#555;
+
+    font-size:1rem;
+
+    line-height:1.9;
+
+    margin-bottom:30px;
+
+    white-space:pre-wrap;
+
+}
+
+/* BOTÓN */
+
+#nextMemory{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ff8fb3,#ff5d95);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 12px 25px rgba(255,105,180,.35);
+
+}
+
+#nextMemory:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 35px rgba(255,105,180,.45);
+
+}
+
+/* ANIMACIÓN */
+
+@keyframes mostrarRecuerdo{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px) scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+/* EFECTO POLAROID */
+
+#memoryImage:hover{
+
+    transform:scale(1.02) rotate(-1deg);
+
+}
+
+/* =======================================
+CARTA FINAL
+======================================= */
+
+#finalSection{
+
+    display:none;
+
+}
+
+#finalSection .letter{
+
+    max-width:430px;
+
+    animation:subirFinal 1.2s ease;
+
+}
+
+#finalSection h1{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:3rem;
+
+    color:#d85c8b;
+
+    margin-bottom:25px;
+
+}
+
+#finalText{
+
+    color:#555;
+
+    font-size:1rem;
+
+    line-height:2;
+
+    white-space:pre-wrap;
+
+    min-height:260px;
+
+}
+
+/* =======================================
+BOTÓN FINAL
+======================================= */
+
+#finishButton{
+
+    margin-top:35px;
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ff6fa5,#ff4f88);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 12px 30px rgba(255,105,180,.35);
+
+}
+
+#finishButton:hover{
+
+    transform:translateY(-3px) scale(1.03);
+
+    box-shadow:0 18px 40px rgba(255,105,180,.45);
+
+}
+
+/* =======================================
+TRANSICIONES
+======================================= */
+
+.ocultar{
+
+    animation:desaparecer .8s forwards;
+
+}
+
+.mostrar{
+
+    animation:aparecerPantalla .8s forwards;
+
+}
+
+@keyframes desaparecer{
+
+    from{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:scale(.95);
+
+    }
+
+}
+
+@keyframes aparecerPantalla{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes subirFinal{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =======================================
+EFECTOS DE LAS FOTOS
+======================================= */
+
+.memoryCard{
+
+    transition:.5s;
+
+}
+
+.memoryCard:hover{
+
+    transform:translateY(-8px);
+
+}
+
+#memoryImage{
+
+    transition:.5s;
+
+}
+
+#memoryImage:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* =======================================
+CORAZONES FLOTANDO
+======================================= */
+
+.heart{
+
+    position:fixed;
+
+    bottom:-50px;
+
+    color:#ff7aa8;
+
+    font-size:22px;
+
+    animation:floatHeart linear forwards;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+}
+
+@keyframes floatHeart{
+
+    0%{
+
+        transform:
+        translateY(0)
+        scale(.6);
+
+        opacity:0;
+
+    }
+
+    20%{
+
+        opacity:.8;
+
+    }
+
+    100%{
+
+        transform:
+        translateY(-120vh)
+        rotate(360deg)
+        scale(1.4);
+
+        opacity:0;
+
+    }
+
+}
+
+/* =======================================
+BRILLO SUAVE
+======================================= */
+
+.memoryCard::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:28px;
+
+    background:linear-gradient(
+        130deg,
+        transparent 0%,
+        rgba(255,255,255,.25) 50%,
+        transparent 100%
+    );
+
+    pointer-events:none;
+
+}
+
+/* =======================================
+RESPONSIVE
+======================================= */
+
+@media(max-width:480px){
+
+    .letter,
+    .memoryCard{
+
+        width:95%;
+
+        padding:20px;
+
+    }
+
+    .letter h1{
+
+        font-size:2.5rem;
+
+    }
+
+    #memoryTitle{
+
+        font-size:2rem;
+
+    }
+
+    #typewriter,
+    #memoryText,
+    #finalText{
+
+        font-size:.95rem;
+
+        line-height:1.8;
+
+    }
+
+    #startButton,
+    #nextMemory,
+    #finishButton{
+
+        font-size:16px;
+
+        padding:15px;
+
+    }
+
+}
+
+/* =======================================
+PÉTALOS
+======================================= */
+
+.petal{
+
+    position:fixed;
+
+    top:-50px;
+
+    width:18px;
+
+    height:18px;
+
+    background:#ffc6da;
+
+    border-radius:60% 40% 60% 40%;
+
+    pointer-events:none;
+
+    opacity:.8;
+
+    animation:caer linear forwards;
+
+    z-index:-2;
+
+}
+
+@keyframes caer{
+
+    from{
+
+        transform:
+        translateY(-50px)
+        translateX(0)
+        rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+        translateY(120vh)
+        translateX(120px)
+        rotate(720deg);
+
+    }
+
+}
+
+/* =======================================
 PARTÍCULAS
-=========================*/
+======================================= */
 
 .sparkle{
 
     position:fixed;
 
-    width:4px;
+    width:5px;
 
-    height:4px;
+    height:5px;
 
     border-radius:50%;
 
     background:white;
 
-    opacity:.7;
+    opacity:.6;
 
-    animation:twinkle 3s infinite;
+    animation:brillo 3s infinite;
+
+    pointer-events:none;
 
 }
 
-@keyframes twinkle{
+@keyframes brillo{
 
     0%,100%{
 
         opacity:.2;
 
-        transform:scale(.6);
+        transform:scale(.5);
 
     }
 
@@ -572,151 +872,124 @@ PARTÍCULAS
 
 }
 
-/*=========================
-TRANSICIÓN ENTRE PÁGINAS
-=========================*/
+/* =======================================
+EFECTO FINAL
+======================================= */
 
-.fade{
+.finishAnimation{
 
-    animation:desaparecer 1s forwards;
+    animation:finalMagic 2s ease;
 
 }
 
-@keyframes desaparecer{
+@keyframes finalMagic{
 
-    from{
+    0%{
 
-        opacity:1;
-
-    }
-
-    to{
+        transform:scale(.9);
 
         opacity:0;
 
     }
 
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
 }
 
-/*=========================
-RESPONSIVE MÓVIL
-=========================*/
+/* =======================================
+SCROLL
+======================================= */
 
-@media (max-width:768px){
+::-webkit-scrollbar{
 
-    #envelope{
+    width:8px;
 
-        width:95vw;
-        height:92vh;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#f59fbe;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/* =======================================
+SELECCIÓN
+======================================= */
+
+::selection{
+
+    background:#ffb5cf;
+
+    color:white;
+
+}
+
+/* =======================================
+ANIMACIÓN SUAVE DE BOTONES
+======================================= */
+
+button{
+
+    transition:.3s;
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+/* =======================================
+IMÁGENES
+======================================= */
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+/* =======================================
+MÓVILES
+======================================= */
+
+@media(max-height:700px){
+
+    .letter{
+
+        padding:22px;
 
     }
 
-    .cover,
-    .back{
+    .letter h1{
 
-        height:180px;
-
-    }
-
-    .cover::before{
-
-        border-left:47.5vw solid transparent;
-        border-right:47.5vw solid transparent;
-        border-top:120px solid #f5aeca;
-
-    }
-
-    #letter{
-
-        width:92%;
-        height:80%;
-        padding:20px;
-
-        transform:translateY(150px);
-
-    }
-
-    .open #letter{
-
-        transform:translateY(-30px);
-
-    }
-
-    #letter h1{
-
-        font-size:2.1rem;
-
-        margin-bottom:20px;
+        font-size:2.4rem;
 
     }
 
     #typewriter{
 
-        font-size:0.95rem;
+        min-height:220px;
 
         line-height:1.8;
 
     }
-
-    #nextButton{
-
-        width:100%;
-
-        padding:15px;
-
-        font-size:16px;
-
-    }
-
-}
-
-/*=========================
-MÓVILES PEQUEÑOS
-=========================*/
-
-@media (max-width:400px){
-
-    #letter{
-
-        padding:16px;
-
-    }
-
-    #letter h1{
-
-        font-size:1.8rem;
-
-    }
-
-    #typewriter{
-
-        font-size:0.9rem;
-
-    }
-
-}
-
-/*=========================
-EFECTO CRISTAL
-=========================*/
-
-#letter{
-
-    backdrop-filter:blur(8px);
-
-    border:1px solid rgba(255,255,255,.5);
-
-}
-
-/*=========================
-SOMBRA SUAVE
-=========================*/
-
-#letter,
-.back{
-
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.15);
 
 }
