@@ -996,3 +996,107 @@ MÓVILES
     }
 
 }
+
+/*=========================================
+CORAZÓN
+=========================================*/
+
+#heartContainer{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:100;
+
+}
+
+#heart{
+
+    position:relative;
+
+    width:240px;
+    height:220px;
+
+    animation:heartbeat 1.6s infinite;
+
+}
+
+.left,
+.right{
+
+    position:absolute;
+
+    width:120px;
+    height:180px;
+
+    background:#ff5c8a;
+
+    border-radius:120px 120px 0 0;
+
+    transition:1.4s cubic-bezier(.25,.8,.25,1);
+
+    box-shadow:0 10px 25px rgba(255,92,138,.35);
+
+}
+
+.left{
+
+    left:0;
+
+    bottom:0;
+
+    transform-origin:100% 100%;
+
+    transform:rotate(-45deg);
+
+}
+
+.right{
+
+    right:0;
+
+    bottom:0;
+
+    transform-origin:0% 100%;
+
+    transform:rotate(45deg);
+
+}
+
+.left.open{
+
+    transform:rotate(-125deg);
+
+}
+
+.right.open{
+
+    transform:rotate(125deg);
+
+}
+
+@keyframes heartbeat{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
