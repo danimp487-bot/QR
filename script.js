@@ -1,61 +1,69 @@
 /**
- * PROYECTO: Regalo Romántico Digital
- * ARQUITECTURA: SPA (Single Page Application) modular y responsiva
+ * PROYECTO: Regalo de Cumpleaños Interactivo
+ * ROL: Desarrollador Senior HTML, CSS, JavaScript (Estilo Vainilla Puro)
  */
 
-// Mensaje romántico para la primera pantalla
-const mensajeTypewriter = "Hay momentos que cambian nuestra vida para siempre... y conocerte a ti fue el más hermoso de todos.";
+// Carta de amor con el formato y saltos de línea solicitados
+const cartaTexto = `Feliz 21 cumpleaños, mi amor. ❤️
 
-// Configuración general del proyecto
-const CONFIG = {
-    velocidadEscritura: 65,  // Milisegundos entre cada letra
-    esperaBoton: 1000,        // Retraso tras terminar el texto antes de mostrar el botón (ms)
+Este año quería regalarte algo un poco diferente. No quería que este día se quedara solo en un regalo material, porque siento que lo más valioso que tenemos es todo lo que hemos vivido juntos.
+
+Por eso he querido preparar este pequeño viaje por nuestra historia. Un recorrido por las etapas, los momentos, las risas, las aventuras y todos esos recuerdos que llevo guardados con tanto cariño. Quiero que, mientras avances, puedas volver a sentir todo lo bonito que hemos construido juntos.
+
+Espero de corazón que te guste y que lo disfrutes tanto como yo he disfrutado preparándolo para ti.
+
+Gracias por hacer mi vida mucho más feliz y por ser la persona con la que quiero seguir creando miles de recuerdos más.
+
+Te amo con todo mi corazón. Feliz cumpleaños, mi vida. ❤️`;
+
+// Configuración de la máquina de escribir
+const CONFIG_ESCRITURA = {
+    velocidadBase: 40,      // Velocidad estándar de escritura (ms)
+    pausaPunto: 600,        // Pausa extra al encontrar un punto (.) (ms)
+    pausaComa: 350,         // Pausa extra al encontrar una coma (,) (ms)
+    pausaFinTexto: 2000,    // Espera cuando el texto se completa antes de desvanecer el cursor y revelar el botón (ms)
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    inicializarParticulas();
-    iniciarTypewriter();
-    configurarEventos();
+    inicializarFondoParticulas();
+    inicializarNavegacion();
 });
 
 /* ==========================================================================
-   SISTEMA DE PARTÍCULAS (CORAZONES Y DESTELLOS)
+   CANVAS DE PARTÍCULAS ROMÁNTICAS (CORAZONES Y DESTELLOS)
    ========================================================================== */
-function inicializarParticulas() {
+function inicializarFondoParticulas() {
     const canvas = document.getElementById("canvas-particulas");
     if (!canvas) return;
-    
-    const ctx = canvas.getContext("2d");
-    let particulasArray = [];
 
-    // Redimensionar canvas de forma responsiva
-    function ajustarPantalla() {
+    const ctx = canvas.getContext("2d");
+    let particulas = [];
+
+    function ajustarMedidas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
-    window.addEventListener("resize", ajustarPantalla);
-    ajustarPantalla();
+    window.addEventListener("resize", ajustarMedidas);
+    ajustarMedidas();
 
-    // Clase para definir cada partícula individual
     class Particula {
         constructor() {
             this.x = Math.random() * canvas.width;
-            this.y = canvas.height + Math.random() * 100;
+            this.y = canvas.height + Math.random() * 80;
             this.size = Math.random() * 8 + 4;
-            this.speedY = Math.random() * 0.8 + 0.3; // Velocidad de subida lenta y sutil
-            this.speedX = Math.sin(Math.random() * Math.PI) * 0.3;
-            this.type = Math.random() > 0.5 ? 'corazon' : 'destello';
-            this.alpha = Math.random() * 0.5 + 0.3;
-            this.color = this.type === 'corazon' ? 'rgba(255, 77, 109, ' : 'rgba(212, 175, 55, ';
+            this.speedY = Math.random() * 0.7 + 0.25; // Ascenso lento y emotivo
+            this.speedX = Math.sin(Math.random() * Math.PI) * 0.25;
+            this.type = Math.random() > 0.4 ? 'corazon' : 'destello';
+            this.alpha = Math.random() * 0.4 + 0.3;
+            this.decay = Math.random() * 0.002 + 0.001;
+            this.color = this.type === 'corazon' ? 'rgba(255, 117, 143, ' : 'rgba(223, 183, 44, ';
         }
 
         actualizar() {
             this.y -= this.speedY;
             this.x += this.speedX;
-            // Desvanecer sutilmente al subir
-            if (this.y < canvas.height * 0.2) {
-                this.alpha -= 0.005;
-            }
+            // Se desvanece de forma gradual
+            this.alpha -= this.decay;
         }
 
         dibujar() {
@@ -64,14 +72,12 @@ function inicializarParticulas() {
             ctx.fillStyle = this.color + this.alpha + ')';
 
             if (this.type === 'corazon') {
-                // Dibujo vectorial de un corazón perfecto
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.bezierCurveTo(this.x - this.size / 2, this.y - this.size / 2, this.x - this.size, this.y + this.size / 3, this.x, this.y + this.size);
                 ctx.bezierCurveTo(this.x + this.size, this.y + this.size / 3, this.x + this.size / 2, this.y - this.size / 2, this.x, this.y);
                 ctx.fill();
             } else {
-                // Dibujo de un destello sutil de 4 puntas
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y - this.size);
                 ctx.quadraticCurveTo(this.x, this.y, this.x + this.size, this.y);
@@ -84,52 +90,138 @@ function inicializarParticulas() {
         }
     }
 
-    // Gestionar el bucle de las partículas
-    function animarParticulas() {
+    function renderLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Generar nuevas partículas periódicamente de forma dosificada
-        if (particulasArray.length < 50 && Math.random() < 0.03) {
-            particulasArray.push(new Particula());
+
+        if (particulas.length < 40 && Math.random() < 0.02) {
+            particulas.push(new Particula());
         }
 
-        for (let i = 0; i < particulasArray.length; i++) {
-            particulasArray[i].actualizar();
-            particulasArray[i].dibujar();
+        for (let i = 0; i < particulas.length; i++) {
+            particulas[i].actualizar();
+            particulas[i].dibujar();
 
-            // Eliminar partículas que salen de la pantalla o se desvanecen por completo
-            if (particulasArray[i].y < -20 || particulasArray[i].alpha <= 0) {
-                particulasArray.splice(i, 1);
+            if (particulas[i].y < -20 || particulas[i].alpha <= 0) {
+                particulas.splice(i, 1);
                 i--;
             }
         }
-        requestAnimationFrame(animarParticulas);
+        requestAnimationFrame(renderLoop);
     }
-    
-    animarParticulas();
+    renderLoop();
 }
 
 /* ==========================================================================
-   MÁQUINA DE ESCRIBIR (TYPEWRITER)
+   LÓGICA DE NAVEGACIÓN Y EXPERIENCIA DE AUDIO
    ========================================================================== */
-function iniciarTypewriter() {
+function inicializarNavegacion() {
+    const btnAbrirRegalo = document.getElementById("btn-abrir-regalo");
+    const btnComenzar = document.getElementById("btn-comenzar");
+    const musica = document.getElementById("musica-fondo");
+
+    // Paso 1: Interactuar con la portada de regalo
+    if (btnAbrirRegalo) {
+        btnAbrirRegalo.addEventListener("click", () => {
+            // Intentar reproducir la música de forma segura
+            if (musica) {
+                musica.play().then(() => {
+                    console.log("Audio iniciado correctamente.");
+                }).catch(err => {
+                    console.warn("Restricciones de reproducción aplicadas:", err);
+                });
+            }
+
+            // Cambiar de pantalla para iniciar el typewriter
+            cambiarPantalla("pantalla-portada", "pantalla-1", () => {
+                iniciarEfectoEscritura();
+            });
+        });
+    }
+
+    // Paso 2: Interactuar con el botón "Comenzar nuestro viaje"
+    if (btnComenzar) {
+        btnComenzar.addEventListener("click", () => {
+            // Animación sutil de pulsación en el botón para feedback
+            btnComenzar.style.transform = "scale(0.95)";
+            
+            setTimeout(() => {
+                cambiarPantalla("pantalla-1", "pantalla-2");
+            }, 150);
+        });
+    }
+}
+
+/**
+ * Controla el fundido suave entre pantallas.
+ */
+function cambiarPantalla(idActual, idSiguiente, callback = null) {
+    const actual = document.getElementById(idActual);
+    const siguiente = document.getElementById(idSiguiente);
+
+    if (actual && siguiente) {
+        actual.classList.remove("activa");
+        
+        setTimeout(() => {
+            siguiente.classList.add("activa");
+            if (callback) callback();
+
+            // Ejecuta el callback oficial para la segunda pantalla
+            if (idSiguiente === "pantalla-2") {
+                mostrarSegundaPantalla();
+            }
+        }, 1500); // Duración sincronizada con la transición CSS (1.5s)
+    }
+}
+
+/* ==========================================================================
+   EFECTO DE MÁQUINA DE ESCRIBIR NATURAL
+   ========================================================================== */
+function iniciarEfectoEscritura() {
     const contenedorTexto = document.getElementById("texto-maquina");
-    const botonEntrar = document.getElementById("btn-entrar");
+    const btnComenzar = document.getElementById("btn-comenzar");
     if (!contenedorTexto) return;
+
+    // Activamos la clase del cursor parpadeante
+    contenedorTexto.classList.add("cursor-activo");
 
     let index = 0;
 
     function escribirLetra() {
-        if (index < mensajeTypewriter.length) {
-            contenedorTexto.textContent += mensajeTypewriter.charAt(index);
+        if (index < cartaTexto.length) {
+            const letraActual = cartaTexto.charAt(index);
+            contenedorTexto.textContent += letraActual;
             index++;
-            setTimeout(escribirLetra, CONFIG.velocidadEscritura);
+
+            // Autoscroll para mantener la lectura visible en dispositivos pequeños
+            const areaScroll = contenedorTexto.closest(".scroll-carta");
+            if (areaScroll) {
+                areaScroll.scrollTop = areaScroll.scrollHeight;
+            }
+
+            // Lógica de pausas expresivas naturales para humanizar la escritura
+            let delay = CONFIG_ESCRITURA.velocidadBase;
+            if (letraActual === '.' || letraActual === '❤️') {
+                delay += CONFIG_ESCRITURA.pausaPunto;
+            } else if (letraActual === ',') {
+                delay += CONFIG_ESCRITURA.pausaComa;
+            }
+
+            setTimeout(escribirLetra, delay);
         } else {
-            // El texto ha terminado de escribirse. Esperamos el tiempo configurado para revelar el botón.
+            // Al finalizar el texto, esperamos un segundo antes de desvanecer el cursor
             setTimeout(() => {
-                botonEntrar.classList.remove("oculto");
-                botonEntrar.classList.add("visible");
-            }, CONFIG.esperaBoton);
+                contenedorTexto.classList.remove("cursor-activo");
+                contenedorTexto.classList.add("cursor-desvanecer");
+
+                // Esperamos los 2 segundos adicionales solicitados para revelar el botón "Comenzar"
+                setTimeout(() => {
+                    if (btnComenzar) {
+                        btnComenzar.classList.remove("oculto");
+                        btnComenzar.classList.add("visible");
+                    }
+                }, CONFIG_ESCRITURA.pausaFinTexto);
+
+            }, 1000);
         }
     }
 
@@ -137,64 +229,13 @@ function iniciarTypewriter() {
 }
 
 /* ==========================================================================
-   CONFIGURACIÓN DE EVENTOS Y AUDIO CONTINUO
-   ========================================================================== */
-function configurarEventos() {
-    const botonEntrar = document.getElementById("btn-entrar");
-    const musica = document.getElementById("musica-fondo");
-
-    if (botonEntrar) {
-        botonEntrar.addEventListener("click", () => {
-            // Intentar reproducir la música al hacer clic (requisito de interacción del navegador)
-            if (musica) {
-                musica.play().catch(error => {
-                    console.log("La reproducción automática de audio requiere interacción física del usuario:", error);
-                });
-            }
-            
-            // Iniciar la transición suave hacia la segunda pantalla
-            cambiarPantalla("pantalla-1", "pantalla-2");
-        });
-    }
-}
-
-/**
- * Cambia suavemente de una pantalla a otra ocultando una y mostrando otra mediante CSS.
- * @param {string} idPantallaActual 
- * @param {string} idPantallaSiguiente 
- */
-function cambiarPantalla(idPantallaActual, idPantallaSiguiente) {
-    const actual = document.getElementById(idPantallaActual);
-    const siguiente = document.getElementById(idPantallaSiguiente);
-
-    if (actual && siguiente) {
-        // Desvanecer la pantalla actual
-        actual.classList.remove("activa");
-        
-        // Esperamos un momento para permitir que se complete la transición de salida antes de activar la siguiente
-        setTimeout(() => {
-            siguiente.classList.add("activa");
-            
-            // Si la siguiente pantalla es la número 2, disparamos su respectiva función callback de control
-            if (idPantallaSiguiente === "pantalla-2") {
-                mostrarSegundaPantalla();
-            }
-        }, 800); // Sincronizado con la duración de la transición CSS
-    }
-}
-
-/* ==========================================================================
-   ESTRUCTURA DE EXPANSIÓN (PANTALLA 2 Y SIGUIENTES)
+   FUNCIÓN COMPILADORA DE PANTALLA 2
    ========================================================================== */
 /**
- * Función preparada para añadir o controlar la lógica de la segunda pantalla en el futuro.
- * Al estar centralizada aquí, puedes poblar elementos dinámicos, iniciar animaciones
- * específicas de esta pantalla o gestionar nuevos botones para siguientes transiciones.
+ * Función que se ejecuta automáticamente cuando se activa la pantalla 2.
+ * Toda la estructura está preparada para añadir lógicas posteriores de forma limpia.
  */
 function mostrarSegundaPantalla() {
-    console.log("Transición exitosa: Pantalla 2 activa. La música de fondo se reproduce de manera ininterrumpida.");
-    
-    // Ejemplo de cómo estructurar la adición de futuras pantallas:
-    // Puedes preparar un botón en el HTML de la pantalla 2 con ID 'btn-siguiente-pantalla'
-    // y programar un comportamiento similar aquí para redirigir a 'pantalla-3', 'pantalla-4', etc.
+    console.log("Iniciando Pantalla 2 de forma satisfactoria...");
+    // El audio sigue reproduciéndose continuamente sin interrupciones.
 }
