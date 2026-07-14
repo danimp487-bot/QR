@@ -46,7 +46,7 @@ const recuerdos = [
 // ==========================================
 // ELEMENTOS DEL DOM
 // ==========================================
-const bgMusic = document.getElementById("bgMusic");
+const music = document.getElementById("bgMusic"); // 👈 Ahora sí coincide con el resto del código
 const musicToggle = document.getElementById("musicToggle");
 
 // Parte 1
