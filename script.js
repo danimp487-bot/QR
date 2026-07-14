@@ -72,10 +72,14 @@ const finalSurpriseBtn = document.getElementById("finalSurpriseBtn");
 // ==========================================
 // SISTEMA DE CONTROL DE MÚSICA
 // ==========================================
+
 let isMusicPlaying = false;
 
 function playMusic() {
-    bgMusic.play().then(() => {
+    // Aseguramos el volumen al máximo (1.0) por si acaso
+    music.volume = 1.0; 
+    
+    music.play().then(() => {
         isMusicPlaying = true;
         musicToggle.classList.add("music-playing");
     }).catch(err => {
@@ -85,18 +89,20 @@ function playMusic() {
 
 function toggleMusic() {
     if (isMusicPlaying) {
-        bgMusic.pause();
+        music.pause();
         isMusicPlaying = false;
         musicToggle.classList.remove("music-playing");
     } else {
-        bgMusic.play();
+        music.play();
         isMusicPlaying = true;
         musicToggle.classList.add("music-playing");
     }
 }
 
+// Control del botón flotante
 musicToggle.addEventListener("click", toggleMusic);
 
+// Primer clic en cualquier parte de la pantalla para activar la música
 document.addEventListener("click", () => {
     if (!isMusicPlaying) playMusic();
 }, { once: true });
