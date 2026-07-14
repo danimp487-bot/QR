@@ -18,11 +18,11 @@ Feliz cumpleaños, mi vida. ❤️`;
 
 const textoFinal = `Y este es el final de nuestro pequeño viaje digital... pero solo el inicio de todo lo maravilloso que nos espera juntos. ❤️
 
-Gracias por ser la mejor compañera de vida que podría desear. Por entenderme con una mirada, reírte de mis chistes y sostenerme cuando lo necesito. Valoro cada segundo a tu lado más de lo que las palabras pueden expresar.
+Gracias por ser la mejor compañera de vida que podría desear. Valoro cada segundo a tu lado más de lo que las palabras pueden expresar.
 
-Espero que ver estas 13 fotos te haya recordado lo bonito que es nuestro camino juntos. Eres mi presente y mi futuro.
+Espero que ver estas fotos te haya recordado lo bonito que es nuestro camino juntos. Eres mi presente y mi futuro.
 
-Feliz 21 cumpleaños, mi amor. Hoy celebramos tu vida, tu sonrisa y el maravilloso ser humano que eres.
+Feliz 21 cumpleaños amor, tu me completas y me llevas a una felicidad que no creía capaz.
 
 Para siempre nosotros, te amo con locura. 💖`;
 
